@@ -1,0 +1,30 @@
+{
+    "entries": [
+        {
+            "name": "Hello Portfolio!",
+            "date": "Сегодня",
+            "tags": [
+                "development",
+                "design",
+                "javascript",
+                "react",
+                "css"
+            ],
+            "img": "TODO - Ссылка на изображение",
+            "desc_ru": "TODO - Наконец-то создал себе портфолио, отрисовать найс принт, добавить запись о поиске работы"
+        },
+        {
+            "name": "CV – Verison 1.0",
+            "date": "12.09.2020",
+            "tags": [
+                "design",
+                "branding",
+                "minimal",
+                "cv"
+            ],
+            "img": "https://cdn.dribbble.com/users/8716876/screenshots/16276878/media/82b218b4a4e9c74b199b6c3cd7fccc28.png",
+            "desc_en": "Old version of my CV",
+            "desc_ru": "Старая версия моего CV"
+        }
+    ]
+}

@@ -1,9 +1,15 @@
-import './App.css'
+import React from "react"
+import { BrowserRouter as Router } from "react-router-dom"
 
-function App() {
+import Index from "./pages/Index"
+import "./App.css"
+
+export default function App() {
   return (
-    <p>init react</p>
-  );
-}
+    <>
+      <BrowserRouter>
 
-export default App
+      </Router>
+    </>
+  )
+}
