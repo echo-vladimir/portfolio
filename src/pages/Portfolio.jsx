@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState } from "react"
 
 export default () => {
     return (
-        <p>Portfolio</p>
+        <div>
+            <h1>Portfolio</h1>
+        </div>
     )
 }
