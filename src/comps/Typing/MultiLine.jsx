@@ -1,31 +1,25 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import "./Line.css"
 
-export default ({ line, speed }) => {
-    const [play, setPlay] = useState(true)
+export default ({ useRender, line }) => {
     const [string, setString] = useState({
         event: "add",
         index: 0,
         chars: "",
     })
+    const [render, setRender] = useRender(handler, string)
 
-    useEffect(() => {
-        const intervalID = setInterval(() => {
-            return (play) ? type() : clearInterval(intervalID)
-        }, speed)
-        return () => clearInterval(intervalID)
-    }, [string])
-
-    function type() {
+    function handler() {
         switch (string.event) {
             case "add":
                 add()
                 break
             case "stop":
-                setPlay(false)
+                setRender(false)
                 break
             default:
-                // setPlay(false)
+                setRender(false)
+                console.log(render)
                 break;
         }
     }

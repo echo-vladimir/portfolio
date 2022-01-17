@@ -1,29 +1,15 @@
-import React, { useState, useEffect } from "react"
+import React, { useState } from "react"
 import "./Line.css"
 
-export default ({ lines, speed, delay = 0 }) => {
-    const [render, setRender] = useState(false)
+export default ({ useRender, lines }) => {
     const [string, setString] = useState({
         event: "add",
         index: 0,
         chars: "",
     })
+    const [render, setRender] = useRender(handler, string)
 
-    useEffect(() => {
-        const timeoutID = setTimeout(() => {
-            setRender(true)
-        }, delay);
-        return () => clearTimeout(timeoutID)
-    }, [])
-
-    useEffect(() => {
-        const intervalID = setInterval(() => {
-            return (render) ? type() : clearInterval(intervalID)
-        }, speed)
-        return () => clearInterval(intervalID)
-    }, [string, render, speed])
-
-    function type() {
+    function handler() {
         switch (string.event) {
             case "add":
                 add()
@@ -35,7 +21,8 @@ export default ({ lines, speed, delay = 0 }) => {
                 setRender(false)
                 break
             default:
-                // setPlay(false)
+                setRender(false)
+                console.log(render)
                 break;
         }
     }
@@ -78,10 +65,8 @@ export default ({ lines, speed, delay = 0 }) => {
     }
 
     return (
-        // <span className={render ? "carriage" : "установить другой класс и отменить анимацию"}>
-        // <span className={"carriage"}>
-        <span className={string.chars.length !== lines[string.index].length ? "carriage" : null}>
+        <div className={string.chars.length !== lines[string.index].length ? "carriage" : null}>
             {string.chars}
-        </span>
+        </div>
     )
 }
