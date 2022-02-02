@@ -1,15 +1,15 @@
 import React, { useState } from "react"
+import useRender from "./useRender"
 import "./index.css"
 
-export default ({ useRender, lines }) => {
+export default ({ lines }) => {
     const [string, setString] = useState({
         event: "add",
         index: 0,
         chars: ""
     })
-    const [render, setRender] = useRender(handler, string)
 
-    function handler() {
+    useRender(e => {
         switch (string.event) {
             case "add":
                 setString(props => addChar(props))
@@ -17,15 +17,10 @@ export default ({ useRender, lines }) => {
             case "remove":
                 setString(props => remChar(props))
                 break
-            case "stop":
-                setRender(false)
-                break
             default:
-                setRender(false)
-                console.log(render)
                 break;
         }
-    }
+    }, [string])
 
     function addChar({ event, index, chars }) {
         const str = { event, index, chars }
