@@ -1,24 +1,27 @@
 import { useEffect, useRef } from "react"
+import animations from "./animations"
 
-const useRender = (cb, deps) => {
-    const frame = useRef()
+const useAnimation = (type, duration, draw, deps) => {
+    const frame =useRef()
     const init = useRef(performance.now())
     const last = useRef(performance.now())
+    const anim = animations[type]
 
     const render = time => {
         const now = performance.now()
-        // const time = (now - init.current) / 1000
 
-        var tFraction = (time - init) / 5000
-        if (tFraction > 1) tFraction = 1
+        let timePassed = time - init.current
+        let timer = timePassed / duration
+        if (timer > 1) timer = 1
 
-        cb({ time })
+        let progress = anim(timer)
+        draw(progress)
 
-        if (tFraction < 1) {
+        if (timer < 1) {
             last.current = now
             frame.current = requestAnimationFrame(render)
         }
-    };
+    }
 
     useEffect(() => {
         frame.current = requestAnimationFrame(render)
@@ -26,4 +29,4 @@ const useRender = (cb, deps) => {
     }, deps)
 }
 
-export default useRender
+export default useAnimation

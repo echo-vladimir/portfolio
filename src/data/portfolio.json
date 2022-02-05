@@ -3,6 +3,7 @@
         {
             "name": "Design System",
             "date": "Сегодня",
+            "link": "/design-system",
             "tags": [
                 "project",
                 "development",
@@ -23,6 +24,7 @@
         {
             "name": "CV – v1.0",
             "date": "Совсем недавно",
+            "link": "/cv-v1.0",
             "tags": [
                 "project",
                 "design",
@@ -39,6 +41,46 @@
             "desc_en": "Old version of my CV designed in the second year of university",
             "desc_pl": "",
             "desc_ru": "Старая версия моего CV спроектированная на втором курсе университета"
+        },
+        {
+            "name": "Работа 1",
+            "desc_ru": "desc_ru"
+        },
+        {
+            "name": "Работа 2",
+            "desc_ru": "desc_ru"
+        },
+        {
+            "name": "Работа 3",
+            "desc_ru": "desc_ru"
+        },
+        {
+            "name": "Работа 4",
+            "desc_ru": "desc_ru"
+        },
+        {
+            "name": "Работа 5",
+            "desc_ru": "desc_ru"
+        },
+        {
+            "name": "Работа 6",
+            "desc_ru": "desc_ru"
+        },
+        {
+            "name": "Работа 7",
+            "desc_ru": "desc_ru"
+        },
+        {
+            "name": "Работа 8",
+            "desc_ru": "desc_ru"
+        },
+        {
+            "name": "Работа 9",
+            "desc_ru": "desc_ru"
+        },
+        {
+            "name": "Работа 10",
+            "desc_ru": "desc_ru"
         }
     ]
 }

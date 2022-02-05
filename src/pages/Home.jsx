@@ -1,9 +1,11 @@
-import React from "react"
+import React, { useState, useEffect, useRef } from "react"
+import Search from "../comps/Search";
 
 export default () => {
     return (
-        <div>
+        <main className="content">
             <h1>Home</h1>
-        </div>
+            <Search />
+        </main>
     )
 }
