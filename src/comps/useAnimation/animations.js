@@ -33,18 +33,6 @@ function bounce(timer) {
     }
 }
 
-// --------------------------
-
-function test(timer) {
-    console.log(Math.cos(2 * timer))
-    if (timer < .5)
-        return Math.pow(timer, 4)
-    else
-        return Math.cos(2 * timer)
-}
-
-// --------------------------
-
 function makeEaseOut(timing) {
     return function (timeFraction) {
         return 1 - timing(1 - timeFraction)
