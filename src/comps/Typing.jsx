@@ -6,19 +6,20 @@ export default ({ text }) => {
     const [string, setString] = useState("")
 
     const chars = text
-    const to = chars.length;
+    const next = chars.length;
     const from = 0;
 
-    // TODO - Очередь анимаций
     useAnimation("quad", 8000, progress => {
-        const result = (to - from) * progress + from
-        setString(chars.substring(0, Math.ceil(result)))
-        console.log(`Количество символов:`, Math.ceil(result))
+        const to = Math.ceil((next - from) * progress + from)
+        setString(chars
+            .substring(0, to)
+            .split("\n")
+            .join("<br/>"))
     }, [string])
 
     return (
-        <div className="carriage">
-            {string}
-        </div>
+        <div className="carriage"
+            dangerouslySetInnerHTML={{ __html: string }}
+        />
     )
 }
