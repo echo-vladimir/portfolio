@@ -15,7 +15,7 @@ const useAnimation = (type, duration, draw, deps) => {
         if (timer > 1) timer = 1
 
         let progress = anim(timer)
-        console.log(`timePassed: ${Math.round(timePassed / 1000)} Секунд. | timer: ${timer} | progress: ${progress}`)
+        // console.log(`timePassed: ${Math.round(timePassed / 1000)} Секунд. | timer: ${timer} | progress: ${progress}`)
         draw(progress)
 
         if (timer < 1) {
