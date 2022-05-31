@@ -24,7 +24,9 @@
     "lint": "eslint ."
   },
   "eslintConfig": {
-    "plugins": ["react-hooks"],
+    "plugins": [
+      "react-hooks"
+    ],
     "extends": [
       "react-app",
       "react-app/jest"
