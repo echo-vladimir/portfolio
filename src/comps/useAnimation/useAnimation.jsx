@@ -1,11 +1,11 @@
 import { useEffect, useRef } from "react"
-import animations from "./animations"
+import timeCalculationFunctions from "./renderTime"
 
-const useAnimation = (type, duration, draw, deps) => {
+const useAnimation = (type, duration, drawFn, deps) => {
     const frame = useRef()
     const init = useRef(performance.now())
     const last = useRef(performance.now())
-    const anim = animations[type]
+    const renderTime = timeCalculationFunctions[type]
 
     const render = time => {
         const now = performance.now()
@@ -14,9 +14,9 @@ const useAnimation = (type, duration, draw, deps) => {
         let timer = timePassed / duration
         if (timer > 1) timer = 1
 
-        let progress = anim(timer)
+        let progress = renderTime(timer)
         // console.log(`timePassed: ${Math.round(timePassed / 1000)} Секунд. | timer: ${timer} | progress: ${progress}`)
-        draw(progress)
+        drawFn(progress)
 
         if (timer < 1) {
             last.current = now

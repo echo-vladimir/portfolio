@@ -1,4 +1,3 @@
-// Time calculation functions
 function linear(timer) {
     return timer
 }
