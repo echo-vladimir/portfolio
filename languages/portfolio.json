@@ -1,0 +1,10 @@
+{
+    "ru": {
+        "title": "Портфолио",
+        "description": "Это мое мульти-лангуашное-некст-реакт портфолио"
+      },
+    "en": {
+        "title": "Portfolio",
+        "description": "This is the my multi-langugage-next-react portfolio"
+    }
+}
