@@ -1,7 +1,0 @@
-.loading {
-    /* filter: blur(1px); */
-    opacity: .9;
-    text-shadow:
-        2px 2px 2px rgba(170, 170, 170, 0.6),
-        1px 0 10px rgba(170, 170, 170, 0.3);
-}
