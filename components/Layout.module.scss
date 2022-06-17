@@ -1,0 +1,40 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 1rem;
+  margin: 0 auto;
+  max-width: 900px;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  word-break: break-word;
+  margin: 0 1rem;
+
+  @media (max-width: 767px) {
+    margin: 0;
+  }
+}
+
+.header,
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  word-break: break-word;
+}
+
+.header {
+  border: 1.5px solid #272727;
+  padding: 1rem;
+}
+
+.footer {
+  align-items: center;
+  position: sticky;
+  border: 1.5px solid #272727;
+  padding: 1rem;
+}

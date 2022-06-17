@@ -2,9 +2,9 @@ import Head from 'next/head'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import langs from '../languages/portfolio.json'
+import langs from '../store/languages/portfolio.json'
 
-export default function IndexPage() {
+export default function PortfolioPage() {
   const { locale, locales, asPath } = useRouter()
   const lang = langs[locale]
   return (
@@ -12,7 +12,7 @@ export default function IndexPage() {
       <Head>
         <title>{lang.title}</title>
       </Head>
-      <h2>{lang.title}</h2>
+      <h1>{lang.title}</h1>
       <p>
         {lang.description}
       </p>
