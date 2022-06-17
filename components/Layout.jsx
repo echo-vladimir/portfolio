@@ -20,9 +20,15 @@ export default function Layout({ children }) {
       <header className={styles.header}>
         <Language />
       </header>
-      <main className={styles.main}>{children}</main>
+      <main className={(children.type.name === 'PortfolioPage') ?
+        styles['porfolio'] :
+        styles.main}>
+        {children}
+      </main>
       <footer className={styles.footer}>
-        <a href='echo.vladimir.k@gmail.com'>echo.vladimir.k@gmail.com</a>
+        <a href='echo.vladimir.k@gmail.com'>
+          echo.vladimir.k@gmail.com
+        </a>
       </footer>
     </div>
   )

@@ -1,22 +1,35 @@
+$full: 100%;
+$md: 65%;
+$offset: 1.5rem;
+
 .container {
   display: flex;
   flex-direction: column;
+  align-items: center;
   min-height: 100vh;
-  padding: 1rem;
-  margin: 0 auto;
-  max-width: 900px;
+
+  @media (max-width: 767px) {
+    padding: 0;
+  }
 }
 
-.main {
+.main,
+.porfolio {
   display: flex;
   flex-direction: column;
   flex: 1;
   word-break: break-word;
-  margin: 0 1rem;
+  width: $md;
+  padding: $offset;
 
   @media (max-width: 767px) {
-    margin: 0;
+    width: $full;
   }
+}
+
+.porfolio {
+  width: $full;
+  padding: 0;
 }
 
 .header,
@@ -25,16 +38,17 @@
   flex-wrap: wrap;
   flex-direction: column;
   word-break: break-word;
-}
-
-.header {
+  width: $md;
+  padding: $offset;
+  margin: $offset;
   border: 1.5px solid #272727;
-  padding: 1rem;
+
+  @media (max-width: 767px) {
+    width: $full;
+    margin: 0;
+  }
 }
 
 .footer {
   align-items: center;
-  position: sticky;
-  border: 1.5px solid #272727;
-  padding: 1rem;
 }
