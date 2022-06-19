@@ -1,3 +1,69 @@
-.selected {
-    color: blue;
+$select-border: #777;
+$select-focus: blue;
+$select-arrow: $select-border;
+
+.control {
+    background-color: transparent;
+    appearance: none;
+    border: none;
+
+    margin: 0;
+    z-index: 1;
+
+    width: 100px;
+    padding: 0 10px;
+
+    &::-ms-expand {
+        display: none;
+    }
+
+    outline: none;
+    color: #ffffff;
+    text-shadow: 1px 1px 5px rgba(170, 170, 170, 0.6),
+    1px 0 8px rgba(170, 170, 170, 0.3);
+
+    * {
+        color: #3e3c3c;
+    }
+
+    position: relative;
+    top: 1px;
+
+    font-family: inherit;
+    font-size: inherit;
+    cursor: inherit;
+}
+
+.select {
+    display: grid;
+    align-items: center;
+    grid-template-areas: "select";
+    
+    select,
+    &::after {
+        grid-area: select;
+    }
+
+    height: 36px;
+
+    border-radius: 10px;
+    border: 1px solid #2b2b2b;
+    background-color: #fff;
+    background-image: linear-gradient(to top, #2c2c2c, #252525 33%);
+
+    font-size: inherit;
+    cursor: pointer;
+
+    &:not(.select--multiple)::after {
+        margin-left: 3px;
+        content: "";
+        justify-self: end;
+        width: 0.4em;
+        height: 0.3em;
+        background-color: $select-arrow;
+        clip-path: polygon(100% 0%, 0 0%, 50% 100%);
+        position: relative;
+        top: 2px;
+        right: 10px;
+    }
 }
