@@ -1,8 +1,6 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import Link from 'next/link'
 
-import Language from '../components/Language'
+import Navbar from './Navbar'
 
 import styles from './Layout.module.scss'
 import utilStyles from '../styles/utils.module.scss'
@@ -18,15 +16,16 @@ export default function Layout({ children }) {
         />
       </Head>
       <header className={styles.header}>
-        <Language />
+        <Navbar/>
       </header>
-      <main className={(children.type.name === 'PortfolioPage') ?
-        styles['porfolio'] :
-        styles.main}>
+      <main className={
+        (children.type.name === 'PortfolioPage') ?
+          styles['porfolio'] :
+          styles.main}>
         {children}
       </main>
       <footer className={styles.footer}>
-        <a href='echo.vladimir.k@gmail.com'>
+        <a href='mailto:echo.vladimir.k@gmail.com'>
           echo.vladimir.k@gmail.com
         </a>
       </footer>
