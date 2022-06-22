@@ -1,0 +1,38 @@
+.showcase {
+    display: flex;
+    flex-direction: row;
+    overflow: hidden;
+}
+
+%card {
+    // display: flex;
+    // flex-direction: column;
+    // background-color: #1E1E1E;
+    height: 550px;
+    margin: 40px 10px;
+    border: 2px solid #2c2b2b;
+    border-radius: 4px;
+    background: #1E1E1E;
+    box-shadow:
+        5px 5px 10px rgba(71, 72, 73, .2),
+        -5px -5px 10px #222429;
+
+    * {
+        margin: 20px;
+    }
+}
+
+.small {
+    @extend %card;
+    min-width: 400px;
+}
+
+.medium {
+    @extend %card;
+    min-width: 400px;
+}
+
+.large {
+    @extend %card;
+    min-width: 800px;
+}
