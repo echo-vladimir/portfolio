@@ -1,15 +1,15 @@
 {
-    "ru": {
-        "title": "Обо мне",
-        "description": "Я делаю мульти-лангуашное-некст-реакт портфолио"
-    },
     "en": {
-        "title": "About me",
+        "title": "Information",
         "description": "I'm doing a multi-lingual-react-portfolio"
     },
     "pl": {
         "title": "O mnie",
         "description": ""
+    },
+    "ru": {
+        "title": "Обо мне",
+        "description": "Я делаю мульти-лангуашное-некст-реакт портфолио"
     },
     "ua": {
         "title": "UA"

@@ -1,8 +1,4 @@
 {
-    "ru": {
-        "title": "Портфолио",
-        "description": "Это мое мульти-лангуашное-некст-реакт портфолио"
-    },
     "en": {
         "title": "Portfolio",
         "description": "This is the my multi-langugage-next-react portfolio"
@@ -10,6 +6,10 @@
     "pl": {
         "title": "About me",
         "description": "I'm doing a multi-lingual-react-portfolio"
+    },
+    "ru": {
+        "title": "Портфолио",
+        "description": "Это мое мульти-лангуашное-некст-реакт портфолио"
     },
     "ua": {
         "title": "About me",
