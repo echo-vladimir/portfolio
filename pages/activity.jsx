@@ -18,18 +18,20 @@ export default function ActivityPage() {
       <Head>
         <title>{lang.title}</title>
       </Head>
-      <Scroll className={styles.showcase}>
-        {
-          data.entries.map((card, i) => {
-            return (
-              <article key={i} className={styles[card.size]}>
-                <h2>{card.name}</h2>
-                <p>{card.desc_ru}</p>
-                <a href='./test'>Test link</a>
-              </article>
-            )
-          })
-        }
+      <Scroll className={styles['showcase-scroll']}>
+        <div className={styles['showcase-container']}>
+          {
+            data.entries.map((card, i) => {
+              return (
+                <article key={i} className={styles[card.size]}>
+                  <h2>{card.name}</h2>
+                  <p>{card?.description?.ru}</p>
+                  <a href='./test'>Test link</a>
+                </article>
+              )
+            })
+          }
+        </div>
       </Scroll>
     </>
   )
