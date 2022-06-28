@@ -1,5 +1,5 @@
 {
-  "name": "web-vldmr",
+  "name": "web-cv",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -16,6 +16,7 @@
   "devDependencies": {
     "eslint": "8.17.0",
     "eslint-config-next": "12.1.6",
+    "eslint-plugin-react-hooks": "^4.7.0-next-a4bed4696-20220627",
     "sass": "^1.52.3"
   }
 }
