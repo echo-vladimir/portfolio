@@ -1,31 +1,33 @@
 import { useEffect, useRef } from "react"
-import timeCalculationFunctions from "./renderTime"
+import timeCalcFns from "./renderTime"
+
+// Bug fix for >14.x.x. version of the NodeJS
+global.performance = global.performance || {
+    now: () => new Date().getTime()
+}
 
 export default function useAnimation(type, duration, drawFn, deps) {
-    const frame = useRef()
+    const timeCalcFn = timeCalcFns[type]
     const init = useRef(performance.now())
-    const last = useRef(performance.now())
-    const renderTime = timeCalculationFunctions[type]
+    const frame = useRef()
 
     const render = time => {
-        const now = performance.now()
-
         let timePassed = time - init.current
         let timer = timePassed / duration
-        if (timer > 1) timer = 1
 
-        let progress = renderTime(timer)
-        // console.log(`timePassed: ${Math.round(timePassed / 1000)} Секунд. | timer: ${timer} | progress: ${progress}`)
+        if (timer > 1)
+            timer = 1
+
+        let progress = timeCalcFn(timer)
+
         drawFn(progress)
 
-        if (timer < 1) {
-            last.current = now
+        if (timer < 1)
             frame.current = requestAnimationFrame(render)
-        }
     }
 
     useEffect(() => {
         frame.current = requestAnimationFrame(render)
         return () => cancelAnimationFrame(frame.current)
-    }, deps)
+    }, [deps])
 }
