@@ -1,27 +1,46 @@
 import { useEffect, useRef } from "react"
-import timeCalcFns from "./renderTime"
+import animations from "./animations"
 
 // Bug fix for >14.x.x. version of the NodeJS
 global.performance = global.performance || {
     now: () => new Date().getTime()
 }
 
-export default function useAnimation(type, duration, drawFn, deps) {
-    const timeCalcFn = timeCalcFns[type]
+const useAnimation = (type, duration, draw, deps, mode, name) => {
+    const animation = animations[type]
     const init = useRef(performance.now())
+    const index = useRef(0)
     const frame = useRef()
 
+    const debug = mode =>
+        props =>
+            (mode === "debug")
+                ? console.log({
+                    ...props
+                }) : undefined
+
     const render = time => {
+        let tracing = debug(mode)
         let timePassed = time - init.current
         let timer = timePassed / duration
 
-        if (timer > 1)
-            timer = 1
+        if (timer > 1) timer = 1
 
-        let progress = timeCalcFn(timer)
+        let progress = animation(timer)
 
-        drawFn(progress)
+        tracing({
+            name,
+            type,
+            rerender: ++index.current,
+            seconds: Math.round(timePassed / 1000),
+            progress
+        })
 
+        draw(progress)
+        play(timer)
+    }
+
+    const play = timer => {
         if (timer < 1)
             frame.current = requestAnimationFrame(render)
     }
@@ -31,3 +50,5 @@ export default function useAnimation(type, duration, drawFn, deps) {
         return () => cancelAnimationFrame(frame.current)
     }, [deps])
 }
+
+export default useAnimation
