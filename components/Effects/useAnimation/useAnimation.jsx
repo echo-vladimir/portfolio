@@ -6,7 +6,7 @@ global.performance = global.performance || {
     now: () => new Date().getTime()
 }
 
-const useAnimation = (type, duration, draw, deps, mode, name) => {
+const useAnimation = (type, duration, draw, deps, mode, name = useAnimation.name) => {
     const animation = animations[type]
     const init = useRef(performance.now())
     const index = useRef(0)
