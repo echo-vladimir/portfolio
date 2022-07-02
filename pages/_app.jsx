@@ -1,11 +1,17 @@
-import '../styles/globals.scss'
-import variables from '../styles/variables.module.scss'
+import dynamic from 'next/dynamic'
 
-import Layout from '../components/Layout'
+import '../styles/globals.scss'
+import styles from '../styles/utils.module.scss'
+
+const Layout = dynamic(() =>
+  import('../components/Layout'), {
+  loading: () => <p className={styles.preloader}>Loading...</p>,
+  ssr: false
+})
 
 function App({ Component, pageProps }) {
   return (
-    <Layout color={variables.primaryColor}>
+    <Layout>
       <Component {...pageProps} />
     </Layout>
   )
