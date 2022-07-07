@@ -48,6 +48,7 @@ const useAnimation = (type, duration, draw, deps, mode, name = useAnimation.name
     useEffect(() => {
         frame.current = requestAnimationFrame(render)
         return () => cancelAnimationFrame(frame.current)
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [deps])
 }
 
