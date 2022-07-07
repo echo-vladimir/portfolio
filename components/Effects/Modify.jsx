@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 import useAnimation from "./useAnimation"
 
-import { modify as modifyEffect } from "./useAnimation/Assets/strings"
+import { modify as modifyEffect } from "./assets/strings"
 
 import styles from "./Index.module.scss"
 
