@@ -1,19 +1,10 @@
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 
 import styles from './Language.module.scss'
 
 export default function Language() {
     const router = useRouter()
-    const { locale, locales, asPath, pathname, query } = router
-
-    const changeLocale = (locale) => {
-        router.push({ pathname, query }, asPath, { locale })
-    }
-
-    const setCookie = (locale) => {
-        document.cookie = `NEXT_LOCALE=${locale};`
-    }
+    const { locale, locales } = router
 
     const langs = {
         'en': 'English',
@@ -23,25 +14,46 @@ export default function Language() {
     }
 
     return (
-        <div className={styles.select}>
-            <select
-                className={styles.control}
-                name='language'
-                value={locale}
-                onChange={(e) => {
-                    e.preventDefault()
-                    changeLocale(e.target.value)
-                    setCookie(e.target.value)
-                }}>
+        <div className={styles.dropdown}>
+            <button
+                type="button"
+                className={styles['dropdown-button']}>
+                {langs[locale]}
+            </button>
+            <div className={styles['dropdown-content']}>
                 {locales.map((localeItem, i) => {
                     return (
-                        <option value={localeItem} key={i}>
+                        <LangLink href={localeItem} key={i}>
                             {langs[localeItem]}
-                        </option>
-                    );
+                        </LangLink>
+                    )
                 })}
-            </select>
-            <span className={styles.focus}></span>
+            </div>
         </div>
+    )
+}
+
+const LangLink = ({ children, href }) => {
+    const router = useRouter()
+    const { asPath, pathname, query } = router
+
+    const changeLocale = (locale) => {
+        router.push({ pathname, query }, asPath, { locale })
+    }
+
+    const setCookie = (locale) => {
+        document.cookie = `NEXT_LOCALE=${locale};`
+    }
+
+    return (
+        <a
+            href={pathname}
+            onClick={(e) => {
+                e.preventDefault()
+                changeLocale(href)
+                setCookie(href)
+            }}>
+            {children}
+        </a>
     )
 }
