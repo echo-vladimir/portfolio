@@ -1,38 +1,32 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-
-import Language from './Language'
-import styles from './Navbar.module.scss'
+import Link from "next/link"
+import { useRouter } from "next/router"
+import LanguageSwitcher from "./LanguageSwitcher"
+import { navbar, items, item } from "./Navbar.module.scss"
+import { selected, unselected } from "../styles/utils.module.scss"
 
 export default function Navbar() {
     const currentRoute = useRouter().pathname
 
     return (
-        <nav className={styles.navbar}>
-            <ul className={styles.menu}>
-                <li className={styles.url}>
-                    <Link href='/'>
-                        <a className={currentRoute === "/" ? styles.selected : ''}>
-                            Index
-                        </a>
+        <nav className={navbar}>
+            <ul className={items}>
+                <li className={item}>
+                    <Link href="/" className={currentRoute === "/" ? selected : unselected}>
+                        /
                     </Link>
                 </li>
-                <li className={styles.url}>
-                    <Link href='/about'>
-                        <a className={currentRoute === "/about" ? styles.selected : ''}>
-                            About
-                        </a>
+                <li className={item}>
+                    <Link href="/cases" className={currentRoute === "/cases" ? selected : unselected}>
+                        cases
                     </Link>
                 </li>
-                <li className={styles.url}>
-                    <Link href='/portfolio'>
-                        <a className={currentRoute === "/portfolio" ? styles.selected : ''}>
-                            Portfolio
-                        </a>
+                <li className={item}>
+                    <Link href="/contact" className={currentRoute === "/contact" ? selected : unselected}>
+                        contact
                     </Link>
                 </li>
-                <li className={styles.url}>
-                    <Language />
+                <li className={item}>
+                    <LanguageSwitcher />
                 </li>
             </ul>
         </nav>
