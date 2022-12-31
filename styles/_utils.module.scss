@@ -1,0 +1,41 @@
+.case {
+    img {
+        text-align: center;
+        width: 400px;
+    }
+}
+
+.selected {
+    text-decoration-color: #9eafec79;
+    color: #9eafec;
+}
+
+.unselected {
+    text-decoration: none;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 20% 0%;
+    }
+
+    20% {
+        background-position: 40% 20%;
+    }
+
+    40% {
+        background-position: 60% 40%;
+    }
+
+    60% {
+        background-position: 100% 100%;
+    }
+
+    80% {
+        background-position: 60% 40%;
+    }
+
+    100% {
+        background-position: 20% 0%;
+    }
+}
