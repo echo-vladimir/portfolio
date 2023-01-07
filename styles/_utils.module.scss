@@ -1,3 +1,5 @@
+@import "vars.module";
+
 .case {
     img {
         text-align: center;
@@ -6,12 +8,36 @@
 }
 
 .selected {
-    text-decoration-color: #9eafec79;
     color: #9eafec;
+    // background-color: #111111;
 }
 
-.unselected {
-    text-decoration: none;
+.unselected {}
+
+%icon {
+    width: .9em;
+    height: .9em;
+    background-size: cover;
+}
+
+.icon-dribbble {
+    @extend %icon;
+    background-image: url(/images/dribbble.svg);
+}
+
+.icon-github {
+    @extend %icon;
+    background-image: url(/images/github.svg);
+}
+
+.icon-linkedin {
+    @extend %icon;
+    background-image: url(/images/linkedin.svg);
+}
+
+.icon-menu {
+    @extend %icon;
+    background-image: url(/images/menu.svg);
 }
 
 @keyframes gradient {

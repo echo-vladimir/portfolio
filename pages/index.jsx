@@ -28,34 +28,19 @@ export default function IndexPage() {
           <ul className={styles.menu}>
             <li className={styles.button}>
               <Link target="_blank" rel="noreferrer" href="https://github.com/echo-vladimir">
-                <Image
-                  src={`/images/github.png`}
-                  alt={"github logo"}
-                  height={16}
-                  width={16}
-                />
+                <span className={styles["icon-github"]} />
                 github
               </Link>
             </li>
             <li className={styles.button}>
               <Link target="_blank" rel="noreferrer" href="https://dribbble.com/echo-vladimir">
-                <Image
-                  src={`/images/dribbble.png`}
-                  alt={"github logo"}
-                  height={15}
-                  width={15}
-                />
+                <span className={styles["icon-dribbble"]} />
                 dribbble
               </Link>
             </li>
             <li className={styles.button}>
               <Link target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/echo-vladimir">
-                <Image
-                  src={`/images/linkedin.png`}
-                  alt={"github logo"}
-                  height={14}
-                  width={14}
-                />
+                <span className={styles["icon-linkedin"]} />
                 linkedin
               </Link>
             </li>
