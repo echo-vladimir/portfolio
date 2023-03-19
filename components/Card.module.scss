@@ -1,116 +1,154 @@
+@import "vars.module";
+
 %card {
-    display: flex;
-    flex-direction: column-reverse;
-    overflow: auto;
-    margin: 10px;
-    border-radius: 6px;
-    transition: all .3s cubic-bezier(0, 0, .5, 1);
-    backdrop-filter: saturate(180%) blur(20px);
+    margin: 60px 16px;
+    border-radius: $radius-m;
+    backdrop-filter: saturate(180%) blur(10px);
     background: rgba(29, 29, 31, 0.72);
     text-shadow: 1px 1px 8px rgb(7, 7, 7), 1px 0 12px rgba(0, 0, 0, 0.929);
-    // box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+    box-shadow: 2px 4px 12px rgba(0, 0, 0, .08);
+    transition: all .3s cubic-bezier(0, 0, .5, 1);
+    box-shadow:
+        10px 10px 20px #0e0e0e,
+        -10px -10px 20px #0e0e0e;
+    overflow: auto;
 
-    time {
-        background-color: rgb(43, 43, 43);
-        padding: .2em .8em;
-        border-radius: 20px;
+    &:hover {
+        transform: scale(1.03);
+        z-index: 90;
     }
 
-    .title {
-        letter-spacing: -1px;
-        font-size: 2.5rem;
-        line-height: 1.2;
-        font-weight: 500;
-        letter-spacing: -0.05rem;
-        margin: 1rem 0;
+    a {
+        position: static;
     }
 
-    .tags {
-        max-width: 50%;
-        color: rgb(192, 192, 192);
-        word-wrap: break-word;
-    }
-
-    .tags span:not(:first-child)::before {
-        content: " · ";
-    }
-
-    .flag {
-        box-shadow: none;
-        border-radius: 100%;
-    }
-
-    .info {
+    .overlay-container {
         display: flex;
-        justify-content: space-around;
+        justify-content: space-evenly;
         flex-direction: column;
-        position: absolute;
         align-items: center;
         text-align: center;
         flex-wrap: wrap;
+        position: absolute;
         height: 100%;
         width: 100%;
         top: 0;
         opacity: 0;
     }
 
-    .info:hover {
-        backdrop-filter: saturate(180%) blur(10px);
+    .overlay-container:hover {
+        backdrop-filter: saturate(180%) blur(66px);
         background-color: rgba(24, 24, 24, 0.45);
-        animation: gradient 3s infinite linear;
-        transition: .2s ease;
+        transition: .4s;
+        transition-delay: .1s;
         opacity: 1;
     }
 
-    .img-wrapper {
+    .tags {
         position: absolute;
-        height: 100%;
-        width: 100%;
         top: 0;
+        background-color: rgba(43, 43, 43, .1);
+        backdrop-filter: blur(6px);
+        padding: .2em .8em;
+        border-radius: 0 0 10px 10px;
+        color: rgba(192, 192, 192, 0.845);
+        text-shadow: none;
+        word-wrap: break-word;
+
+        span:not(:first-child)::before {
+            content: " · ";
+        }
     }
 
-    img {
-        box-shadow: inset 0 0 50px 40px #000;
+    .main {
+        max-width: 60%;
+
+        time {
+            background-color: rgba(43, 43, 43, 0.514);
+            padding: .2em .8em;
+            border-radius: 20px;
+        }
+
+        h1 {
+            letter-spacing: -1px;
+            font-size: 3rem;
+            line-height: 1.2;
+            font-weight: 500;
+            letter-spacing: -0.05rem;
+            margin: 1rem 0;
+        }
     }
 
-    a {
-        text-decoration: none;
+    .footer {
+        display: flex;
+        flex-direction: row;
+        position: absolute;
+        bottom: 10%;
+        background-color: rgba(43, 43, 43, 0.514);
+        border-radius: 18px;
+        padding: .4em .8em;
+        box-shadow: 1px 1px 2px rgba(7, 7, 7, 0.349), 1px 0 6px rgba(0, 0, 0, 0.1);
+
+        .flag {
+            margin: 0 .3em;
+            box-shadow: none;
+            border-radius: 100%;
+            filter: contrast(.7);
+        }
+
+        p {
+            color: rgba(192, 192, 192, .5);
+        }
     }
+}
+
+.highlight {
+    color: $primary-text-color;
+}
+
+.XS {
+    @extend %card;
+    width: 18vh;
+    height: 18vh;
+    margin: 3vh 16px;
+    border: 2px solid #181818;
+    backdrop-filter: saturate(180%) blur(10px);
+    background: rgba(29, 29, 31, 0.4);
 
     &:hover {
-        transform: scale(1.03);
+        transform: scale(1.04);
     }
-}
 
-.center {
-    max-width: 60%;
-    justify-content: center;
-}
-
-.end {
-    justify-content: flex-end;
+    &:first-child {
+        margin: 60px 16px 3vh;
+    }
 }
 
 .S {
     @extend %card;
     flex: 1 1 30vh;
     width: 40vh;
-    height: 20vh;
+    height: 60vh;
 }
 
 .M {
     @extend %card;
     width: 40vh;
-    height: 80vh;
+    height: 60vh;
+
+    &:hover {
+        transform: scale(1.02);
+    }
 }
 
 .L {
     @extend %card;
     width: 80vh;
-    height: 80vh;
+    height: 60vh;
 
-    @media (max-width: 1200px) {
-        height: 100vh;
-        width: 100vh;
+    &:hover {
+        transform: scale(1.02);
     }
 }
+
+@media (max-width: $breakpoint-l) {}
