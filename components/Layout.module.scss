@@ -1,63 +1,56 @@
-$full: 100%;
-$md: 65%;
-$offset: 1.5rem;
+@import "vars.module";
 
-.container {
+.vertical-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: 100vh;
-
-  @media (max-width: 767px) {
-    padding: 0;
-  }
+  justify-content: center;
+  width: 100%;
 }
 
-.main,
-.porfolio {
+.horizontal-container {
   display: flex;
   flex-direction: column;
-  flex: 1;
-  word-break: break-word;
-  width: $md;
-  padding: 0 $offset;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
 
-  @media (max-width: 767px) {
-    width: $full;
+  &::-webkit-scrollbar {
+    display: none;
   }
+
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 
-.porfolio {
-  width: $full;
-  padding: 0;
-}
-
-.header,
-.footer {
+.header {
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   word-break: break-word;
-  width: $md;
-  margin: $offset 0;
-  border-top: 2px solid #272727;
-  border-radius: 10px;
-  background: #1E1E1E;
-  box-shadow:
-      5px 5px 10px rgba(71, 72, 73, .2),
-      -5px -5px 10px #222429;
+  width: 55%;
+}
 
-  @media (max-width: 767px) {
-    width: $full;
-    margin: 0;
+.main {
+  width: 55%;
+}
+
+.cases {
+  width: 100%;
+}
+
+@media (max-width: $breakpoint-l) {
+  .main,
+  .header {
+    width: 90%;
   }
 }
 
-.footer {
-  align-items: center;
-  padding: $offset;
-
-  a {
-    text-decoration: underline solid #8f8f8f 1.5px;
+@media (max-width: $breakpoint-m) {
+  .main,
+  .header {
+    width: 100%;
   }
 }
