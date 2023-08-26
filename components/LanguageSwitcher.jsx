@@ -1,59 +1,50 @@
-import { useRouter } from "next/router"
-import Link from "next/link"
-
-import styles from "./LanguageSwitcher.module.scss"
+import { useRouter } from "next/router";
+import Link from "next/link";
+import {
+  selected,
+  unselected,
+  unavailable,
+} from "./LanguageSwitcher.module.scss";
 
 export default function LanguageSwitcher() {
-    const { locales, locale } = useRouter()
+  const { locale } = useRouter();
 
-    const aliases = {
-        "en": "Eng",
-        "ru": "Рус"
-    }
+  const languages = [
+    { code: "en", alias: "Eng", active: true },
+    { code: "ru", alias: "Рус" },
+  ];
 
-    return (
-        <>
-            {
-                locales.map((oneLocale, i) => {
-                    return (
-                        <Language
-                            key={oneLocale}
-                            locale={oneLocale}
-                            className={
-                                (oneLocale === locale)
-                                    ? styles.selected
-                                    : undefined}>
-                            {aliases[oneLocale]}
-                        </Language>
-                    )
-                })
-            }
-        </>
-    )
+  return (
+    <>
+      {languages.map((lang) => (
+        <Language
+          key={lang.code}
+          locale={lang.code}
+          isActive={lang.code === locale || lang.active}
+        >
+          {lang.alias}
+        </Language>
+      ))}
+    </>
+  );
 }
 
-const Language = ({ children, locale, className }) => {
-    const router = useRouter()
-    const { asPath, pathname, query } = router
+const Language = ({ children, locale, isActive }) => {
+  let className;
 
-    const setLocale = (locale) => {
-        router.push({ pathname, query }, asPath, { locale })
-    }
+  if (isActive) {
+    className = selected;
+  } else if (locale === "en") {
+    className = unselected;
+  } else {
+    className = unavailable;
+  }
 
-    const setCookie = (locale) => {
-        document.cookie = `NEXT_LOCALE=${locale};`
-    }
-
-    return (
-        <Link
-            className={className}
-            href={pathname}
-            onClick={(e) => {
-                e.preventDefault()
-                setLocale(locale)
-                setCookie(locale)
-            }}>
-            {children}
-        </Link>
-    )
-}
+  return (
+    <li>
+      <a className={className} href="#">
+        {children}
+      </a>
+    </li>
+  );
+};
