@@ -1,55 +1,60 @@
-import { useEffect, useRef } from "react"
-import animations from "./animations"
+import { useState, useEffect, useRef, useCallback } from "react";
+import animations from "./animations";
 
-// Bug fix for >14.x.x. version of the NodeJS
+// Fix for >14.x.x. version of the NodeJS
 global.performance = global.performance || {
-    now: () => new Date().getTime()
-}
+  now: () => new Date().getTime(),
+};
 
-const useAnimation = (type, duration, draw, deps, mode, name = useAnimation.name) => {
-    const animation = animations[type]
-    const init = useRef(performance.now())
-    const index = useRef(0)
-    const frame = useRef()
+export default function useAnimation(type, duration, draw, deps, mode) {
+  const init = useRef(performance.now());
+  const index = useRef(0);
+  const frame = useRef();
 
-    const debug = mode =>
-        props =>
-            (mode === "debug")
-                ? console.log({
-                    ...props
-                }) : undefined
+  const animation = animations[type];
 
-    const render = time => {
-        let tracing = debug(mode)
-        let timePassed = time - init.current
-        let timer = timePassed / duration
-
-        if (timer > 1) timer = 1
-
-        let progress = animation(timer)
-
-        tracing({
-            name,
-            type,
-            rerender: ++index.current,
-            seconds: Math.round(timePassed / 1000),
-            progress
+  const debug = (mode) => (props) =>
+    mode === "debug"
+      ? console.table({
+          ...props,
         })
+      : null;
 
-        draw(progress)
-        play(timer)
-    }
+  const render = useCallback(
+    (time) => {
+      let tracing = debug(mode);
+      let timePassed = time - init.current;
+      let timer = timePassed / duration;
 
-    const play = timer => {
-        if (timer < 1)
-            frame.current = requestAnimationFrame(render)
-    }
+      if (timer > 1) timer = 1;
 
-    useEffect(() => {
-        frame.current = requestAnimationFrame(render)
-        return () => cancelAnimationFrame(frame.current)
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [deps])
+      let progress = animation(timer);
+
+      tracing({
+        type,
+        rerender: ++index.current,
+        seconds: Math.round(timePassed / 1000),
+        progress,
+      });
+
+      draw(progress);
+
+      if (timer < 1) frame.current = requestAnimationFrame(render);
+    },
+    [animation, draw, duration, mode, type]
+  );
+
+  const play = () => (frame.current = requestAnimationFrame(render));
+  const stop = () => cancelAnimationFrame(frame.current);
+
+  useEffect(() => {
+    frame.current = requestAnimationFrame(render);
+    return () => stop();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [deps]);
+
+  return {
+    play,
+    stop,
+  };
 }
-
-export default useAnimation

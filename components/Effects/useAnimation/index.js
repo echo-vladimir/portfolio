@@ -1,1 +1,1 @@
-export { default } from './useAnimation.jsx';
+export { default } from "./useAnimation.jsx";
