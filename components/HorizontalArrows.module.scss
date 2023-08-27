@@ -1,0 +1,57 @@
+.arrow {
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-self: center;
+  align-items: center;
+  align-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 10%;
+  background: #151516;
+  opacity: 0.9;
+  user-select: none;
+  z-index: 999;
+  transition: background-color 0.3s;
+  transition: all 0.4s cubic-bezier(0, 0, 0.5, 1);
+  backdrop-filter: blur(20px);
+  box-shadow: 2px 2px 10px #0e0e0e83, -2px -2px 10px #0e0e0e96;
+}
+
+.arrow:hover {
+  background: #202020;
+
+  & {
+    transition: transform 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.arrow[disabled] {
+  cursor: default;
+  opacity: 0;
+}
+
+.l {
+  width: 36px;
+  height: 36px;
+
+  margin-right: 6px;
+  margin-bottom: 1px;
+  vertical-align: middle;
+  transform: scale(1.1);
+  display: inline-block;
+}
+
+.r {
+  width: 14px;
+  height: 14px;
+
+  vertical-align: middle;
+  transform: scale(1.1);
+  display: inline-block;
+}

@@ -1,128 +1,149 @@
-import { useState, useEffect, useRef } from "react"
-import Link from "next/link"
-import styles from "./HorizontalScroll.module.scss"
-import { useAnimation } from "./Effects"
+import { useState, useEffect, useContext, useRef } from "react";
+import { ScrollMenu } from "react-horizontal-scrolling-menu";
+import Styler from "stylefire";
+import { animate } from "popmotion";
+import usePreventBodyScroll from "../hooks/usePreventBodyScroll";
+import useSwipe from "../hooks/useSwipe";
+import useDrag from "../hooks/useDrag";
+import { LeftArrow, RightArrow } from "./HorizontalArrows";
+import styles from "../styles/animation.module.scss";
+import SlideAnimationContext from "../contexts/SlideAnimationContext";
 
-export default function HorizontalScroll({ children }) {
-    const scrollContainer = useRef(null)
-    const [scrolledToY, setScrolledToY] = useState(0)
-    const [animating, isAnimating] = useState(true)
+export default function HorizontalScroll({ children, allCasesData }) {
+  const { disableScroll } = usePreventBodyScroll();
+  const { onTouchEnd, onTouchMove, onTouchStart } = useSwipe();
+  const { dragStop, dragMove } = useDrag();
 
-    const [totalSections, setTotalSections] = useState(0)
-    const [currentSection, setCurrentSection] = useState(0)
-    const resize = () => {
-        const element = scrollContainer.current
-        const totalSections = Math.round(element.scrollLeftMax / window.innerWidth) + 1
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+  }, []);
 
-        setTotalSections(totalSections)
-    };
-
-    useEffect(() => {
-        window.addEventListener("resize", resize);
-        resize();
-        return () => window.removeEventListener("resize", resize);
-    }, []);
-
-    useEffect(() => {
-        const element = scrollContainer.current
-
-        if (element) {
-            const onWheel = event => {
-                event.preventDefault()
-
-                const totalSections = Math.round(element.scrollLeftMax / window.innerWidth + 1)
-                setTotalSections(totalSections)
-
-                const step = scrolledToY + event.deltaY * 6
-                const section = Math.round(scrolledToY / window.innerWidth + 1, 1)
-
-                if (step < 0) {
-                    setCurrentSection(section)
-                    setScrolledToY(1)
-                    return
-                }
-
-                if (step >= element.scrollLeftMax) {
-                    setScrolledToY(element.scrollLeftMax)
-                    setCurrentSection(section)
-                    return
-                }
-
-                setCurrentSection(section)
-                setScrolledToY(step)
-            }
-
-            element.addEventListener("wheel", onWheel)
-            return () => element.removeEventListener("wheel", onWheel)
+  const handleDrag =
+    ({ scrollContainer }) =>
+    (ev) =>
+      dragMove(ev, (posDiff) => {
+        if (scrollContainer.current) {
+          scrollContainer.current.scrollLeft += posDiff;
         }
-    }, [scrolledToY, totalSections, currentSection])
+      });
 
-    useAnimation("bounceEaseOut", 5000, progress => {
-        if (progress === 1) return isAnimating(false)
-        const element = scrollContainer.current
-        const currentPositionY = scrollContainer.current.scrollLeft
-        const currentYMax = element.scrollLeftMax
-        setScrolledToY(currentYMax * progress)
-        setCurrentSection(Math.round(currentYMax * progress / window.innerWidth + 1))
-    }, animating)
+  const handleScroll = ({ visibleElements }) => {
+    setVisibleElements(visibleElements);
+  };
 
-    useEffect(() => {
-        const element = scrollContainer.current
-        element.scrollTo({
-            left: scrolledToY,
-            behavior: "smooth",
-        })
-    }, [scrolledToY])
+  const [currentCase, setCurrentCase] = useState(0);
+  const [visibleElements, setVisibleElements] = useState([]);
 
-    const start = event => {
-        event.preventDefault()
-        setScrolledToY(0)
+  useEffect(() => {
+    const currentElementId = visibleElements[0];
+    if (currentElementId) {
+      if (allCasesData.map((item) => item.id).includes(currentElementId)) {
+        const currentElementIndex = allCasesData.findIndex(
+          (item) => item.id === currentElementId
+        );
+
+        setCurrentCase(currentElementIndex + 1);
+      } else {
+        setCurrentCase(0);
+      }
     }
+  }, [visibleElements]);
 
-    const prev = (event) => {
-        event.preventDefault()
-        if (scrolledToY >= 0)
-            setScrolledToY(scrolledToY - 800)
-    }
+  const scrollBehavior = (instructions) => {
+    if (!instructions || instructions.length === 0) return;
+    const [{ el, left }] = instructions;
+    if (!el) return;
 
-    const next = (event) => {
-        event.preventDefault()
-        const element = scrollContainer.current
-        const currentYMax = element.scrollLeftMax
+    const styler = Styler(el);
 
-        if (scrolledToY <= currentYMax)
-            setScrolledToY(scrolledToY + 800)
-    }
+    animate({
+      from: el.scrollLeft,
+      to: left,
+      type: "spring",
+      onUpdate: (left) => styler.set("scrollLeft", left),
+    });
+  };
 
-    return (
-        <>
-            <div ref={scrollContainer} className={styles["scroll-container"]}>
-                <div className={styles["scroll-content"]}>
-                    {children}
-                </div>
+  const { isLoading, isAnimationComplete, currentContentRef } = useContext(
+    SlideAnimationContext
+  );
+
+  const apiRef = useRef({});
+
+  return (
+    <>
+      <div
+        ref={currentContentRef}
+        className={isLoading ? styles.hidden : ""}
+        onMouseEnter={disableScroll}
+        onMouseLeave={dragStop}
+      >
+        <ScrollMenu
+          apiRef={apiRef}
+          Header={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "0.9rem",
+                marginTop: "46px",
+              }}
+            />
+          }
+          Footer={
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                fontSize: "0.9rem",
+                marginTop: "46px",
+              }}
+            >
+              <h3
+                className={`${
+                  isAnimationComplete ? styles.fadeIn : styles.fadeOut
+                }`}
+              >{`${currentCase ? currentCase : "- "}/${
+                allCasesData.length
+              }`}</h3>
             </div>
-            <div className={styles["scroll-nav"]}>
-                <ul className={styles.menu}>
-                    <li className={styles.button}>
-                        <Link href="" onClick={start}>
-                            &#8592; В начало
-                        </Link>
-                    </li>
-                    <li className={styles.button}>
-                        <Link href="" onClick={prev}>
-                            &#8592; Prev [esc + a]
-                        </Link>
-                    </li>
-                    <li className={styles.index}>
-                        {`${currentSection} / ${totalSections}`}
-                    </li>
-                    <li className={styles.button}>
-                        <Link href="" onClick={next}>
-                            [esc + d] Next &#8594;
-                        </Link>
-                    </li>
-                </ul>
-            </div>
-        </>
-    )
+          }
+          onWheel={onWheel}
+          alignCenter={true}
+          clickWhenDrag={false}
+          dragging={true}
+          LeftArrow={<LeftArrow isAnimationComplete={isAnimationComplete} />}
+          RightArrow={<RightArrow isAnimationComplete={isAnimationComplete} />}
+          onTouchEnd={onTouchEnd}
+          onTouchMove={onTouchMove}
+          onTouchStart={onTouchStart}
+          onMouseMove={handleDrag}
+          transitionDuration={{ duration: 300 }}
+          transitionEase={(t) => (t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t)}
+          transitionBehavior={scrollBehavior}
+          onUpdate={(apiObj) => handleScroll(apiObj)}
+        >
+          {children}
+        </ScrollMenu>
+      </div>
+    </>
+  );
+}
+
+function onWheel({ scrollNext, scrollPrev }, ev) {
+  const isThouchpad = Math.abs(ev.deltaX) !== 0 || Math.abs(ev.deltaY) < 15;
+
+  if (isThouchpad) {
+    ev.stopPropagation();
+    return;
+  }
+
+  if (ev.deltaY < 0) {
+    scrollNext(undefined, undefined, undefined, { duration: 300 });
+  } else if (ev.deltaY > 0) {
+    scrollPrev(undefined, undefined, undefined, { duration: 300 });
+  }
 }

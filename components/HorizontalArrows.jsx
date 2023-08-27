@@ -1,99 +1,92 @@
-import React from "react"
-import { VisibilityContext } from "react-horizontal-scrolling-menu"
+import { useState, useEffect, useContext } from "react";
+import { VisibilityContext } from "react-horizontal-scrolling-menu";
+import animationStyles from "../styles/animation.module.scss";
+import styles from "./HorizontalArrows.module.scss";
 
-function Arrow({
-    children,
-    disabled,
-    onClick,
-    style
-}) {
-    return (
-        <button
-            disabled={disabled}
-            onClick={onClick}
-            style={{
-                ...style,
-                cursor: "pointer",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "center",
-                alignSelf: "center",
-                alignItems: "center",
-                alignContent: "center",
-                flexWrap: "wrap",
-                width: "36px",
-                height: "36px",
-                opacity: disabled ? "0" : ".6",
-                userSelect: "none",
-                zIndex: "9999",
-            }}>
-            {children}
-        </button>
-    )
+function Arrow({ children, disabled, onClick, style, isAnimationComplete }) {
+  return (
+    <div
+      disabled={disabled}
+      onClick={onClick}
+      className={
+        isAnimationComplete
+          ? `${animationStyles.fadeIn} ${styles.arrow}`
+          : animationStyles.fadeOut
+      }
+      style={style}
+    >
+      {children}
+    </div>
+  );
 }
 
-export function LeftArrow() {
-    const {
-        isFirstItemVisible,
-        scrollToItem,
-        getPrevElement,
-        visibleItemsWithoutSeparators,
-        initComplete
-    } = React.useContext(VisibilityContext)
+export function LeftArrow({ isAnimationComplete }) {
+  const {
+    isFirstItemVisible,
+    scrollPrev,
+    initComplete,
+    visibleElements,
+  } = useContext(VisibilityContext);
 
-    const [disabled, setDisabled] = React.useState(!initComplete || (initComplete && isFirstItemVisible))
+  const [disabled, setDisabled] = useState(
+    !initComplete || (initComplete && isFirstItemVisible)
+  );
 
-    React.useEffect(() => {
-        // NOTE: detect if whole component visible
-        if (visibleItemsWithoutSeparators.length) {
-            setDisabled(isFirstItemVisible)
-        }
-    }, [isFirstItemVisible, visibleItemsWithoutSeparators])
+  useEffect(() => {
+    if (visibleElements.length) {
+      setDisabled(isFirstItemVisible);
+    }
+  }, [isFirstItemVisible, visibleElements]);
 
-    // NOTE: for scroll 1 item
-    const clickHandler = () => scrollToItem(getPrevElement(), "smooth", "start");
-
-    return (
-        <Arrow
-            disabled={disabled}
-            style={{
-                position: "absolute",
-                left: "1%",
-            }}
-            onClick={clickHandler}>
-            &larr;
-        </Arrow>
-    )
+  return (
+    <Arrow
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        position: "absolute",
+        fontSize: "1em",
+        left: "2%",
+        padding: "22px",
+        backdropFilter: "blur(44px)",
+      }}
+      isAnimationComplete={isAnimationComplete}
+      disabled={disabled}
+      onClick={() => scrollPrev()}
+    >
+      Prev ←
+    </Arrow>
+  );
 }
 
-export function RightArrow() {
-    const {
-        isLastItemVisible,
-        scrollToItem,
-        getNextElement,
-        visibleItemsWithoutSeparators
-    } = React.useContext(VisibilityContext)
+export function RightArrow({ isAnimationComplete }) {
+  const { isLastItemVisible, scrollNext, visibleElements } =
+    useContext(VisibilityContext);
 
-    const [disabled, setDisabled] = React.useState(!visibleItemsWithoutSeparators.length && isLastItemVisible)
+  const [disabled, setDisabled] = useState(
+    !visibleElements.length && isLastItemVisible
+  );
 
-    React.useEffect(() => {
-        if (visibleItemsWithoutSeparators.length) {
-            setDisabled(isLastItemVisible)
-        }
-    }, [isLastItemVisible, visibleItemsWithoutSeparators])
+  useEffect(() => {
+    if (visibleElements.length) {
+      setDisabled(isLastItemVisible);
+    }
+  }, [isLastItemVisible, visibleElements]);
 
-    // NOTE: for scroll 1 item
-    const clickHandler = () => scrollToItem(getNextElement(), "smooth", "end")
-
-    return (
-        <Arrow
-            disabled={disabled}
-            style={{
-                position: "absolute",
-                right: "1%",
-            }}
-            onClick={clickHandler}>
-            &rarr;
-        </Arrow>
-    )
+  return (
+    <Arrow
+      style={{
+        justifyContent: "center",
+        alignItems: "center",
+        position: "absolute",
+        fontSize: "1em",
+        right: "2%",
+        padding: "22px",
+      }}
+      isAnimationComplete={isAnimationComplete}
+      disabled={disabled}
+      onClick={() => scrollNext()}
+    >
+      Next →
+    </Arrow>
+  );
 }
