@@ -1,79 +1,69 @@
-import { useState } from "react"
-import Head from "next/head"
-import Link from "next/link"
-
-import Card from "../components/Card"
-import CardHero from "../components/CardHero"
-import { button, icoGithub, icoDribbble, icoLinkedin } from "../components/LinkButton.module.scss"
-import styles from "../components/Card.module.scss"
-import HorizontalScroll from "../components/HorizontalScroll"
-
-import { getSortedCasesData } from "../lib/cases"
+import { useState, useRef, useEffect } from "react";
+import Head from "next/head";
+import Card from "../components/Card";
+import CardHero from "../components/CardHero";
+import HorizontalScroll from "../components/HorizontalScroll";
+import { getSortedCasesData } from "../lib/cases";
 
 export async function getStaticProps() {
-  const allCasesData = await getSortedCasesData()
+  const allCasesData = await getSortedCasesData();
 
   return {
     props: {
       allCasesData,
     },
-  }
+  };
 }
 
 export default function Cases({ allCasesData }) {
-  const [selected, setSelected] = useState([])
+  const [selected, setSelected] = useState([]);
+  const containerRef = useRef();
 
-  const isItemSelected = (id) => !!selected.find((el) => el === id)
+  const [containerWidth, setContainerWidth] = useState(0);
+  const itemWidth = containerWidth * 0.6;
+  const itemMargin = `${(containerWidth - itemWidth) / 2}px`;
 
-  const handleClick = (id) => ({ getItemById, scrollToItem }) => {
-    const itemSelected = isItemSelected(id)
+  useEffect(() => {
+    if (containerRef.current && !containerWidth) {
+      setContainerWidth(containerRef.current.clientWidth);
+    }
+  }, [containerRef, containerWidth]);
 
+  const isItemSelected = (id) => selected.includes(id);
+
+  const handleClick = (id) => () => {
     setSelected((currentSelected) =>
-      itemSelected
+      isItemSelected(id)
         ? currentSelected.filter((el) => el !== id)
-        : currentSelected.concat(id)
-    )
-  }
+        : [...currentSelected, id]
+    );
+  };
 
   return (
     <>
       <Head>
-        <title>My Cases</title>
+        <title>Cases | Volodymyr</title>
       </Head>
-      <HorizontalScroll>
-        <CardHero />
-        <div>
-          <div className={styles["XS"]}>
-            <Link target="_blank" rel="noreferrer" href="https://github.com/echo-vladimir" className={button}>
-              <span className={icoGithub} />
-              <p>Github</p>
-            </Link>
-          </div>
-          <div className={styles["XS"]}>
-            <Link target="_blank" rel="noreferrer" href="https://dribbble.com/echo-vladimir" className={button}>
-              <span className={icoDribbble} />
-              <p>Dribbble</p>
-            </Link>
-          </div>
-          <div className={styles["XS"]}>
-            <Link target="_blank" rel="noreferrer" href="https://www.linkedin.com/in/echo-vladimir" className={button}>
-              <span className={icoLinkedin} />
-              <p>LinkedIn</p>
-            </Link>
-          </div>
-        </div>
-        {
-          allCasesData.map(item =>
+      <div ref={containerRef}>
+        <HorizontalScroll allCasesData={allCasesData}>
+          <CardHero
+            itemId="hero"
+            width={itemWidth + "px"}
+            margin={itemMargin}
+          />
+          {allCasesData.map((item) => (
             <Card
-              itemId={item.id}
               key={item.id}
+              itemId={item.id}
               onClick={handleClick(item.id)}
               selected={isItemSelected(item.id)}
+              width={itemWidth + "px"}
+              margin={itemMargin}
               {...item}
             />
-          )
-        }
-      </HorizontalScroll>
+          ))}
+        </HorizontalScroll>
+      </div>
     </>
-  )
+  );
 }

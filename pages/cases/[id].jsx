@@ -1,65 +1,178 @@
-import Head from "next/head"
-import Image from "next/image"
-import Date from "../../components/Date"
-import styles from "../../styles/cases.module.scss"
-
-import { getAllCasesIds, getCaseData } from "../../lib/cases"
+import { useState, useEffect, useRef } from "react";
+import Head from "next/head";
+import Image from "next/image";
+import Date from "../../components/Date";
+import ScrollCase from "../../components/ScrollCase";
+import {
+  getAllCasesIds,
+  getCaseData,
+  getSortedCasesData,
+} from "../../lib/cases";
+import useDeviceType from "../../hooks/useDeviceType";
+import useHtmlParser from "../../hooks/useHtmlParser";
+import styles from "../../styles/cases.module.scss";
+import { useRouter } from "next/router";
 
 export async function getStaticPaths() {
-    const paths = getAllCasesIds()
-    return {
-        paths,
-        fallback: false,
-    }
+  const paths = getAllCasesIds();
+  return {
+    paths,
+    fallback: false,
+  };
 }
 
-export async function getStaticProps({ params }) {
-    const caseData = await getCaseData(params.id)
-    return {
-        props: {
-            caseData,
-        },
-    }
+export async function getStaticProps(props) {
+  const allCasesData = await getSortedCasesData();
+  const caseData = await getCaseData(props.params.id, allCasesData);
+
+  return {
+    props: {
+      caseData,
+    },
+  };
 }
 
-export default function Case({ caseData: { title, date, flag, team, description, contentHtml } }) {
-    return (
-        <>
-            <Head>
-                <title>{title}</title>
-            </Head>
-            <article className={styles.case}>
-                {
-                    (team) ?
-                        <div className={styles.team}>
-                            <Image
-                                className={styles.flag}
-                                src={`/images/${flag}.webp`}
-                                alt={"poland flag"}
-                                height={18}
-                                width={18}
-                                style={{
-                                    objectFit: 'none',
-                                }}
-                            />
-                            {(team) ? <p>Made with <span className={styles.highlight}>{team}</span> team</p> : <></>}
-                        </div>
-                        : <></>
-                }
-                <div className={styles.meta}>
-                    <h1>{title}</h1>
-                    <Date dateString={date} />
-                    <p>{description}</p>
+export default function Case({ caseData }) {
+  const router = useRouter();
+  const device = useDeviceType();
+  const {
+    prevCase,
+    nextCase,
+    cover,
+    title,
+    date,
+    country,
+    team,
+    tags,
+    description,
+    contentHtml,
+    currentNum,
+    totalCases,
+  } = caseData;
+
+  const blocks = useHtmlParser(contentHtml);
+  const containerRef = useRef();
+  const [containerWidth, setContainerWidth] = useState(0);
+  const [isSafari, setIsSafari] = useState(false);
+
+  const itemWidth = containerWidth * 0.7;
+  const itemMargin = `${(containerWidth - itemWidth) / 2}px`;
+
+  useEffect(() => {
+    window.history.scrollRestoration = "manual";
+    window.scrollTo(0, 0);
+    setIsSafari(/Safari/.test(window.navigator.userAgent));
+
+    function handleResize() {
+      if (device !== "desktop") {
+        router.reload();
+      }
+    }
+    window.addEventListener("resize", handleResize);
+
+    if (containerRef.current && !containerWidth) {
+      setContainerWidth(containerRef.current.clientWidth);
+    }
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, [containerRef, containerWidth, device, router]);
+
+  return (
+    <>
+      <Head>
+        <title>{title}</title>
+      </Head>
+
+      <div className={styles.content} ref={containerRef}>
+        <ScrollCase
+          prevCase={prevCase}
+          nextCase={nextCase}
+          currentNum={currentNum}
+          totalCases={totalCases}
+        >
+          <section
+            className={styles.full}
+            tabIndex={0}
+            style={
+              device !== "desktop"
+                ? {
+                    width: itemWidth,
+                    marginLeft: itemMargin,
+                    marginRight: itemMargin,
+                  }
+                : {}
+            }
+          >
+            {!isSafari && (
+              <div className={styles["img-wrapper"]}>
+                <Image
+                  src={cover}
+                  alt={description}
+                  fill
+                  lazy="true"
+                  placeholder="blur"
+                  blurDataURL={`/_next/image?url=${cover}&w=16&q=1`}
+                  quality={10}
+                  sizes="100vw, 100vh"
+                  style={{
+                    objectFit: "cover",
+                  }}
+                />
+              </div>
+            )}
+            <div className={styles["centred-container"]}>
+              <div className={styles.tags}>
+                {tags.map((tag) => (
+                  <span key={tag}>{tag}</span>
+                ))}
+              </div>
+              {country && (
+                <div className={styles.footer}>
+                  <Image
+                    className={styles.country}
+                    src={`/images/${country}.webp`}
+                    alt={"Country flag"}
+                    height={18}
+                    width={18}
+                  />
+                  {team && device !== "mobile" ? (
+                    <div className={styles.team}>
+                      With<span className={styles.highlight}>{team}</span>
+                      team
+                    </div>
+                  ) : (
+                    <div className={styles.team}>{country}</div>
+                  )}
                 </div>
-                <div
-                    dangerouslySetInnerHTML={{ __html: contentHtml }}
-                    className={styles.content} />
-                <p>
-                    <a href="mailto:echo.vladimir.k@gmail.com">
-                        echo.vladimir.k@gmail.com
-                    </a>
-                </p>
-            </article>
-        </>
-    )
+              )}
+            </div>
+            <div className={styles["overlay-container"]}>
+              <div className={styles.main}>
+                <Date dateString={date} />
+                <h1>{title}</h1>
+                {description}
+              </div>
+            </div>
+          </section>
+          {blocks.map((block, index) => (
+            <div
+              key={index}
+              dangerouslySetInnerHTML={{ __html: block }}
+              style={
+                device !== "desktop"
+                  ? {
+                      width: itemWidth,
+                      marginLeft: itemMargin,
+                      marginRight: itemMargin,
+                    }
+                  : {}
+              }
+            />
+          ))}
+        </ScrollCase>
+      </div>
+    </>
+  );
 }

@@ -1,14 +1,25 @@
-import { GenerateEffect } from "../components/Effects"
-import styles from "../styles/index.module.scss"
+import { useContext } from "react";
+import Head from "next/head";
+import { GenerateEffect } from "../components/Effects";
+import SlideAnimationContext from "../contexts/SlideAnimationContext";
+import styles from "../styles/404.module.scss";
 
 export default function Custom404() {
-    return (
-        <section className={styles.container}>
-            <div className={styles.content}>
-                <h1>
-                    <GenerateEffect string={`404 - Page Not Found :(`} speed={1500} />
-                </h1>
-            </div>
-        </section>
-    )
+  const { currentContentRef } = useContext(SlideAnimationContext);
+
+  return (
+    <>
+      <Head>
+        <title>Meow 404</title>
+      </Head>
+      <section className={styles.container} ref={currentContentRef}>
+        <div className={styles.content}>
+          <h1>
+            <GenerateEffect string={`Meow 404 NOTHING HERE`} speed={2500} />
+          </h1>
+          <img alt="qr code" src="/images/qr.png" />
+        </div>
+      </section>
+    </>
+  );
 }
