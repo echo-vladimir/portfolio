@@ -1,34 +1,35 @@
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback } from "react";
 
 const preventDefault = (ev) => {
-    if (ev.preventDefault) {
-        ev.preventDefault()
-    }
-    ev.returnValue = false
-}
+  if (ev.preventDefault) {
+    ev.preventDefault();
+  }
+  ev.returnValue = false;
+};
 
 const enableBodyScroll = () => {
-    document && document.removeEventListener("wheel", preventDefault, false)
-}
+  document && document.removeEventListener("wheel", preventDefault, false);
+};
+
 const disableBodyScroll = () => {
-    document &&
-        document.addEventListener("wheel", preventDefault, {
-            passive: false
-        })
-}
+  document &&
+    document.addEventListener("wheel", preventDefault, {
+      passive: false,
+    });
+};
 
 function usePreventBodyScroll() {
-    const [hidden, setHidden] = useState(false)
+  const [hidden, setHidden] = useState(false);
 
-    useEffect(() => {
-        hidden ? disableBodyScroll() : enableBodyScroll()
+  useEffect(() => {
+    hidden ? disableBodyScroll() : enableBodyScroll();
 
-        return enableBodyScroll
-    }, [hidden])
+    return enableBodyScroll;
+  }, [hidden]);
 
-    const disableScroll = useCallback(() => setHidden(true), [])
-    const enableScroll = useCallback(() => setHidden(false), [])
-    return { disableScroll, enableScroll }
+  const disableScroll = useCallback(() => setHidden(true), []);
+  const enableScroll = useCallback(() => setHidden(false), []);
+  return { disableScroll, enableScroll };
 }
 
-export default usePreventBodyScroll
+export default usePreventBodyScroll;
