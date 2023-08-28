@@ -1,6 +1,12 @@
 /** @type {import('next').NextConfig} */
 const path = require("path");
 
+const isProduction = process.env.NODE_ENV === "production";
+
+const repo = "web-portfolio";
+const assetPrefix = `/${repo}/`;
+const basePath = `/${repo}`;
+
 const nextConfig = {
   reactStrictMode: true,
   sassOptions: {
@@ -13,6 +19,11 @@ const nextConfig = {
   // },
   output: "export",
   images: { unoptimized: true },
+  assetPrefix: assetPrefix,
+  basePath: basePath,
+  publicRuntimeConfig: {
+    linkPrefix: isProduction ? basePath : "",
+  },
 };
 
 module.exports = nextConfig;
