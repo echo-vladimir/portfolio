@@ -1,67 +1,103 @@
 @import "vars.module";
 
-.case {
-    img {
-        text-align: center;
-        width: 400px;
+$selected-color: #9eafec;
+$unavailable-color: #353535;
+$unavailable-opacity: 0.2;
+$disabled-color: #7d7d7d;
+$disabled-bg-color: #4b4b4b;
+
+@mixin breakpoint($point) {
+  @if $point == md {
+    @media (max-width: 991px) {
+      @content;
     }
+  } @else if $point == lg {
+    @media (max-width: 1400px) {
+      @content;
+    }
+  }
+}
+
+.case {
+  img {
+    text-align: center;
+    width: 400px;
+  }
 }
 
 .selected {
-    color: #9eafec;
-    // background-color: #111111;
+  color: $selected-color;
 }
 
-.unselected {}
+.unavailable {
+  cursor: not-allowed;
+  pointer-events: none;
+  opacity: $unavailable-opacity;
+  filter: grayscale(100%);
+  background-color: $unavailable-color;
+  border-radius: 0 $radius-s $radius-s 0;
 
-%icon {
-    width: .9em;
-    height: .9em;
-    background-size: cover;
+  &:hover {
+    background: $unavailable-color;
+    transition: 0s;
+  }
 }
 
-.icon-dribbble {
-    @extend %icon;
-    background-image: url(/images/dribbble.svg);
+.disabled {
+  color: $disabled-color;
+  background-color: $disabled-bg-color;
 }
 
-.icon-github {
-    @extend %icon;
-    background-image: url(/images/github.svg);
+// Animation
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
-.icon-linkedin {
-    @extend %icon;
-    background-image: url(/images/linkedin.svg);
+@keyframes slide-in {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
 
-.icon-menu {
-    @extend %icon;
-    background-image: url(/images/menu.svg);
+@keyframes slide-out {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-100%);
+  }
 }
 
 @keyframes gradient {
-    0% {
-        background-position: 20% 0%;
-    }
+  0% {
+    background-position: 20% 0%;
+  }
 
-    20% {
-        background-position: 40% 20%;
-    }
+  20% {
+    background-position: 40% 20%;
+  }
 
-    40% {
-        background-position: 60% 40%;
-    }
+  40% {
+    background-position: 60% 40%;
+  }
 
-    60% {
-        background-position: 100% 100%;
-    }
+  60% {
+    background-position: 100% 100%;
+  }
 
-    80% {
-        background-position: 60% 40%;
-    }
+  80% {
+    background-position: 60% 40%;
+  }
 
-    100% {
-        background-position: 20% 0%;
-    }
+  100% {
+    background-position: 20% 0%;
+  }
 }

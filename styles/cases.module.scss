@@ -1,0 +1,412 @@
+@import "vars.module";
+@import "utils.module";
+
+$shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2), 0px 4px 4px 0px rgba(0, 0, 0, 0.1),
+  0px 1px 4px 0px rgba(0, 0, 0, 0.1);
+$background-opacity: 0.72;
+$text-shadow-opacity: 0.7;
+$transition-duration: 0.3s;
+$transition-timing-function: cubic-bezier(0, 0, 0.5, 1);
+$backdrop-filter-blur: saturate(180%) blur(8px);
+
+@mixin text-shadow($opacity) {
+  text-shadow: 1px 1px 8px rgba(0, 0, 0, $opacity),
+    1px 0 12px rgba(0, 0, 0, $opacity);
+}
+
+.full {
+  position: relative;
+  width: 54vw;
+  height: 60vh;
+  margin: 0 3rem 0 23vw;
+  border-radius: $radius-m;
+  background: rgba(29, 29, 31, 0.72);
+  backdrop-filter: $backdrop-filter-blur;
+  @include text-shadow(0.7);
+  transition: all 0.3s cubic-bezier(0, 0, 0.5, 1);
+  box-shadow: $shadow;
+  overflow: hidden;
+
+  .overlay-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 60vh;
+    padding: 0;
+    margin: 0;
+    border-radius: $radius-m;
+    background-color: rgba(24, 24, 24, 0.45);
+    backdrop-filter: saturate(180%) blur(66px);
+    transition: 0.4s 0.1s;
+    flex-wrap: wrap;
+    text-align: center;
+  }
+
+  .centred-container {
+    display: flex;
+    position: absolute;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+
+    .tags {
+      position: absolute;
+      top: 4%;
+      background-color: rgba(43, 43, 43, 0.4);
+      box-shadow: $shadow;
+      backdrop-filter: blur(6px);
+      padding: 0.3em 1em;
+      border-radius: 10px;
+      color: rgba(237, 237, 237, 0.8);
+      word-wrap: break-word;
+      font-size: 1em;
+      z-index: 10;
+      pointer-events: none;
+
+      span:not(:first-child)::before {
+        content: " · ";
+      }
+
+      @include breakpoint(md) {
+        text-align: center;
+        max-width: 80%;
+      }
+    }
+  }
+
+  .img-wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
+  .main {
+    max-width: 60%;
+
+    time {
+      padding: 0.2em 0.8em;
+      border-radius: 18px;
+      opacity: 0.6;
+    }
+
+    h1 {
+      letter-spacing: -1px;
+      word-wrap: break-word;
+      font-size: 4em;
+      line-height: 1.2;
+      font-weight: 500;
+      letter-spacing: -0.05rem;
+      margin: 1rem 0;
+      text-transform: uppercase;
+      font-weight: bold;
+      text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.3), 1px 0 12px rgba(0, 0, 0, 0.3);
+    }
+
+    @include breakpoint(lg) {
+      max-width: 90%;
+
+      h1 {
+        font-size: 3em;
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    position: absolute;
+    align-items: center;
+    pointer-events: none;
+    bottom: 8%;
+    background-color: rgba(43, 43, 43, 0.4);
+    box-shadow: $shadow;
+    backdrop-filter: blur(6px);
+    border-radius: 10px;
+    color: rgba(237, 237, 237, 0.8);
+    padding: 0.3em 1em;
+    font-size: 1em;
+    z-index: 10;
+
+    .team {
+      width: 100%;
+      height: 100%;
+      text-shadow: none;
+      font-size: 1em;
+      backdrop-filter: none;
+    }
+
+    .team:first-child {
+      margin-right: 0.3em;
+    }
+
+    .team:last-child {
+      margin-left: 0.3em;
+    }
+
+    .country {
+      box-shadow: none;
+      filter: contrast(0.8);
+    }
+
+    @media (max-width: 991px) {
+      max-width: 80%;
+      bottom: 4%;
+    }
+  }
+}
+
+.highlight {
+  color: $primary-text-color;
+  margin: 0 0.3em;
+}
+
+.backgraund {
+  position: absolute;
+  top: 0;
+  width: 100vh;
+  height: 60vh;
+  border-radius: 10%;
+}
+
+.content {
+  margin: 15px 0;
+  user-select: none;
+
+  a {
+    font-size: 2em;
+    font-weight: bold;
+    text-decoration: none;
+    z-index: 1;
+
+    &[href^="https://"]::after, 
+    &[href^="http://"]::after
+    {
+      content: "💅🏼👀";
+      font-size: 0.8em;
+      text-decoration: none;
+      vertical-align: super;
+    }
+
+    &[href$=".tdesktop-theme"]:after {
+      content: "💅🏼";
+      font-size: 0.8em;
+      text-decoration: none;
+      vertical-align: super;
+    }
+
+    &[href$=".pdf"]:after {
+      content: ".pdf";
+      font-size: 0.8em;
+      font-weight: 600;
+      vertical-align: super;
+    }
+  }
+
+  p {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 60vh;
+    padding: 40px;
+    margin-right: 2vw;
+    word-break: break-word;
+    background: rgba(29, 29, 31, 0.4);
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7), 1px 0 12px rgba(0, 0, 0, 0.7);
+    border: 4px solid #18181870;
+    border-radius: $radius-m;
+    box-shadow: $shadow;
+    overflow: hidden;
+    backdrop-filter: $backdrop-filter-blur;
+    transition: all 0.3s cubic-bezier(0, 0, 0.5, 1);
+
+    @include breakpoint(lg) {
+      width: 100%;
+    }
+  }
+
+  h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 300px;
+    height: 60vh;
+    padding: 40px;
+    margin-right: 2vw;
+    word-break: break-word;
+    background: rgba(29, 29, 31, 0.4);
+    text-shadow: 1px 1px 8px rgba(57, 57, 55, 0.2),
+      1px 0 12px rgba(0, 0, 0, 0.7);
+    border: 4px solid #18181870;
+    border-radius: $radius-m;
+    box-shadow: $shadow;
+    overflow: hidden;
+    backdrop-filter: $backdrop-filter-blur;
+    transition: all 0.3s cubic-bezier(0, 0, 0.5, 1);
+  }
+
+  strong {
+    font-size: 1.1em;
+  }
+
+  ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 30vw;
+    height: 60vh;
+    padding: 20px;
+    margin-right: 2vw;
+    background: rgba(29, 29, 31, 0.4);
+    text-shadow: 1px 1px 8px rgba(0, 0, 0, 0.7), 1px 0 12px rgba(0, 0, 0, 0.7);
+    border: 4px solid #18181870;
+    border-radius: $radius-m;
+    box-shadow: $shadow;
+    overflow-y: auto;
+    backdrop-filter: saturate(180%) blur(8px);
+    transition: all 0.3s cubic-bezier(0, 0, 0.5, 1);
+
+    li {
+      display: flex;
+      align-items: center;
+      position: relative;
+      margin: 0 10px 10px 20px;
+
+      &::before {
+        content: "";
+        position: absolute;
+        box-shadow: 1px 1px 5px rgba(170, 170, 170, 0.6),
+          1px 0 6px rgba(170, 170, 170, 0.3);
+        border-radius: 2px;
+        left: -18px;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background-color: rgb(252, 252, 252);
+      }
+
+      > ul {
+        width: 100%;
+        height: 100%;
+        background: none;
+        border: none;
+        box-shadow: none;
+        backdrop-filter: none;
+        margin: 1em 0;
+
+        li {
+          padding: 0.1em 0;
+        }
+      }
+
+      ul {
+        overflow: hidden;
+        background: none;
+        border: none;
+        box-shadow: none;
+      }
+    }
+
+    @include breakpoint(lg) {
+      list-style-type: none;
+      display: flex;
+      justify-content: center;
+      flex-direction: column;
+      width: 100%;
+      margin: 0;
+    }
+
+    @include breakpoint(md) {
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+      padding: 0 20px 0 20px;
+      border-radius: 0;
+
+      li {
+        display: flex;
+        flex-direction: column;
+        align-items: self-start;
+        justify-content: flex-start;
+        position: relative;
+        margin: 10px 0 0 0;
+      }
+
+      > li > ul {
+        width: 100%;
+        margin: 0;
+        border-radius: 0;
+      }
+    }
+  }
+
+  blockquote,
+  video {
+    height: 60vh;
+    vertical-align: middle;
+    background-color: $primary-background-color;
+    line-height: 1.2;
+  }
+
+  figure,
+  video {
+    position: relative;
+    margin-right: 2vw;
+    text-shadow: none;
+    overflow: hidden;
+  }
+
+  figure img,
+  video {
+    height: 60vh;
+    object-fit: cover;
+    object-position: center;
+    user-select: none;
+    pointer-events: none;
+    border-radius: $radius-m;
+    transition: transform 0.3s;
+    box-shadow: $shadow;
+
+    @include breakpoint(lg) {
+      width: 100%;
+    }
+  }
+
+  video {
+    user-select: auto;
+    pointer-events: auto;
+  }
+
+  figcaption {
+    display: block;
+    position: absolute;
+    text-align: center;
+    min-width: 92%;
+    padding: 1em 0;
+    border-radius: 16px;
+    backdrop-filter: $backdrop-filter-blur;
+    background-color: rgba(43, 43, 43, 0.7);
+    box-shadow: $shadow;
+    text-shadow: 1px 1px 5px rgba(170, 170, 170, 0.6),
+      1px 0 6px rgba(170, 170, 170, 0.3);
+    bottom: 1%;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    opacity: 0;
+    transition: all 0.3s;
+
+    a {
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1em;
+      z-index: 1;
+    }
+  }
+
+  figure:hover figcaption {
+    transform: translate(-50%, -50%);
+    opacity: 1;
+  }
+}
