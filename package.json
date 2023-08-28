@@ -2,10 +2,11 @@
   "name": "web-portfolio",
   "version": "1.0.0",
   "private": true,
+  "license": "SEE LICENSE IN ./LICENSE.md",
   "scripts": {
     "dev": "next dev",
     "prebuild": "next telemetry disable",
-    "build": "next telemetry status && next build",
+    "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
@@ -19,8 +20,8 @@
     "remark-html": "^15.0.1"
   },
   "devDependencies": {
-    "eslint": "8.29.0",
-    "eslint-config-next": "13.0.6",
-    "sass": "^1.56.1"
+    "eslint": "8.30.0",
+    "eslint-config-next": "^13.4.19",
+    "serve": "^14.2.1"
   }
 }
