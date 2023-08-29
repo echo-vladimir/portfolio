@@ -12,6 +12,7 @@ import useDeviceType from "../../hooks/useDeviceType";
 import useHtmlParser from "../../hooks/useHtmlParser";
 import styles from "../../styles/cases.module.scss";
 import { useRouter } from "next/router";
+import { ISPROD, BASEPATH } from "../../config/const";
 
 export async function getStaticPaths() {
   const paths = getAllCasesIds();
@@ -112,8 +113,6 @@ export default function Case({ caseData }) {
                   alt={description}
                   fill
                   lazy="true"
-                  placeholder="blur"
-                  blurDataURL={`/_next/image?url=${cover}&w=16&q=1`}
                   quality={10}
                   sizes="100vw, 100vh"
                   style={{
@@ -132,7 +131,7 @@ export default function Case({ caseData }) {
                 <div className={styles.footer}>
                   <Image
                     className={styles.country}
-                    src={`/images/${country}.webp`}
+                    src={`${ISPROD ? BASEPATH : ""}/images/${country}.webp`}
                     alt={"Country flag"}
                     height={18}
                     width={18}

@@ -5,6 +5,7 @@ import Image from "next/image";
 import Date from "./Date";
 import styles from "./Card.module.scss";
 import useDeviceType from "../hooks/useDeviceType";
+import { ISPROD, BASEPATH } from "../config/const";
 
 export default function Card({
   id,
@@ -37,12 +38,10 @@ export default function Card({
       <Link href="/cases/[id]" as={`/cases/${id}`}>
         <div className={styles["img-wrapper"]}>
           <Image
-            src={cover}
+            src={ISPROD ? BASEPATH + cover : cover}
             alt={description}
             fill
             lazy="true"
-            placeholder="blur"
-            blurDataURL={`/_next/image?url=${cover}&w=16&q=1`}
             quality={90}
             sizes="100vw, 100vh"
             style={{
@@ -60,7 +59,7 @@ export default function Card({
             <div className={styles.footer}>
               <Image
                 className={styles.country}
-                src={`/images/${country}.webp`}
+                src={`${ISPROD ? BASEPATH : ""}/images/${country}.webp`}
                 alt={`The flag of the country for ${title}`}
                 height={18}
                 width={18}

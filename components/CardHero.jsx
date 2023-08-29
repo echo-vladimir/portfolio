@@ -3,16 +3,22 @@ import { useContext, useEffect, useState } from "react";
 import useDeviceType from "../hooks/useDeviceType";
 import styles from "./CardHero.module.scss";
 import CardStyles from "../components/Card.module.scss";
-import {
-  button,
-  icoGithub,
-  icoDribbble,
-  icoLinkedin,
-} from "../components/LinkButton.module.scss";
+import LinkStyles from "../components/LinkButton.module.scss";
+import { ISPROD } from "../config/const";
 import { TypingEffect } from "./Effects";
 
 export default function CardHero({ width, margin }) {
   const deviceType = useDeviceType();
+
+  const icoGithub = ISPROD
+    ? LinkStyles["icoGithub-prod"]
+    : LinkStyles["icoGithub-dev"];
+  const icoDribbble = ISPROD
+    ? LinkStyles["icoDribbble-prod"]
+    : LinkStyles["icoDribbble-dev"];
+  const icoLinkedin = ISPROD
+    ? LinkStyles["icoLinkedin-prod"]
+    : LinkStyles["icoLinkedin-dev"];
 
   const [isClient, setIsClient] = useState(false);
   useEffect(() => {
@@ -97,7 +103,7 @@ export default function CardHero({ width, margin }) {
               target="_blank"
               rel="noreferrer"
               href="https://github.com/echo-vladimir"
-              className={button}
+              className={LinkStyles.button}
             >
               <span className={icoGithub} />
               <p>Github</p>
@@ -108,7 +114,7 @@ export default function CardHero({ width, margin }) {
               target="_blank"
               rel="noreferrer"
               href="https://dribbble.com/echo-vladimir"
-              className={button}
+              className={LinkStyles.button}
             >
               <span className={icoDribbble} />
               <p>Dribbble</p>
@@ -119,7 +125,7 @@ export default function CardHero({ width, margin }) {
               target="_blank"
               rel="noreferrer"
               href="https://www.linkedin.com/in/echo-vladimir"
-              className={button}
+              className={LinkStyles.button}
             >
               <span className={icoLinkedin} />
               <p>LinkedIn</p>

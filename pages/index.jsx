@@ -42,7 +42,7 @@ export default function Cases({ allCasesData }) {
   return (
     <>
       <Head>
-        <title>Cases | Volodymyr</title>
+        <title>Cases</title>
       </Head>
       <div ref={containerRef}>
         <HorizontalScroll allCasesData={allCasesData}>

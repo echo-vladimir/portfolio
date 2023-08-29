@@ -57,6 +57,12 @@
     }
   }
 
+  .img-wrapper {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
   .overlay-container {
     display: flex;
     justify-content: space-evenly;

@@ -37,22 +37,32 @@
   display: inline-block;
 }
 
-.icoDribbble {
+.icoDribbble-prod {
+  @extend %icon;
+  background-image: url(/portfolio/images/dribbble.svg);
+}
+
+.icoGithub-prod {
+  @extend %icon;
+  background-image: url(/portfolio/images/github.svg);
+}
+
+.icoLinkedin-prod {
+  @extend %icon;
+  background-image: url(/portfolio/images/linkedin.svg);
+}
+
+.icoDribbble-dev {
   @extend %icon;
   background-image: url(/images/dribbble.svg);
 }
 
-.icoGithub {
+.icoGithub-dev {
   @extend %icon;
   background-image: url(/images/github.svg);
 }
 
-.icoLinkedin {
+.icoLinkedin-dev {
   @extend %icon;
   background-image: url(/images/linkedin.svg);
-}
-
-.icoMenu {
-  @extend %icon;
-  background-image: url(/images/menu.svg);
 }

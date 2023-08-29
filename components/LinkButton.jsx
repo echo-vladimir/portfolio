@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import { ISPROD } from "../config/const";
 import styles from "./LinkButton.module.scss";
 
 export default function LinkButton() {
@@ -11,7 +11,11 @@ export default function LinkButton() {
           rel="noreferrer"
           href="https://github.com/echo-vladimir"
         >
-          <span className={styles["icon-github"]} />
+          <span
+            className={
+              ISPROD ? styles["icoGithub-prod"] : styles["icoGithub-dev"]
+            }
+          />
           github
         </Link>
       </li>
@@ -21,7 +25,11 @@ export default function LinkButton() {
           rel="noreferrer"
           href="https://dribbble.com/echo-vladimir"
         >
-          <span className={styles["icon-dribbble"]} />
+          <span
+            className={
+              ISPROD ? styles["icoDribbble-prod"] : styles["icoDribbble-dev"]
+            }
+          />
           dribbble
         </Link>
       </li>
@@ -31,7 +39,11 @@ export default function LinkButton() {
           rel="noreferrer"
           href="https://www.linkedin.com/in/echo-vladimir"
         >
-          <span className={styles["icon-linkedin"]} />
+          <span
+            className={
+              ISPROD ? styles["icoLinkedin-prod"] : styles["icoLinkedin-dev"]
+            }
+          />
           linkedin
         </Link>
       </li>
