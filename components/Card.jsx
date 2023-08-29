@@ -38,7 +38,7 @@ export default function Card({
       <Link href="/cases/[id]" as={`/cases/${id}`}>
         <div className={styles["img-wrapper"]}>
           <Image
-            src={ISPROD ? BASEPATH + cover : cover}
+            src={cover}
             alt={description}
             fill
             lazy="true"
