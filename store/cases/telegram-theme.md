@@ -15,7 +15,7 @@ standout feature was the touch of purple, which added some style without being
 too bright. Great care was taken with the color choices, ensuring everything
 felt cohesive and user-friendly.
 
-[Download](https://github.com/echo-vladimir/portfolio/blob/main/public/media/telegram-theme/colors.tdesktop-theme)
+[Download](https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/telegram-theme/colors.tdesktop-theme)
 
 <figure>
     <img alt="Telegram UI applied theme" src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/telegram-theme/shot.jpg"/>
