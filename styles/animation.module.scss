@@ -38,6 +38,22 @@ $transition-delay: 500ms;
     inset -5px -5px 10px rgba(170, 170, 170, 0.3);
 }
 
+.loading-line {
+  height: 4px;
+  animation: fadeInOut 1s infinite forwards;
+  text-transform: uppercase;
+  letter-spacing: 0.5em;
+
+  @keyframes fadeInOut {
+    0%,
+    100% {
+      opacity: 0.4;
+    }
+    50% {
+      opacity: 1;
+    }
+  }
+}
 .slide-in {
   animation: slide-in $animation-short-duration forwards;
 }

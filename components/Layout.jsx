@@ -44,7 +44,7 @@ export default function Layout({ children }) {
         {isLoading && (
           <div className={animationStyles["loading-container"]}>
             <div ref={loadingRef} className={animationStyles.loading} />
-            <p>L O A D I N G</p>
+            <p className={animationStyles["loading-line"]}>loading</p>
           </div>
         )}
 
