@@ -1,5 +1,6 @@
 # ./
 
+[![Node.js CI](https://github.com/echo-vladimir/portfolio/actions/workflows/build-and-deploy.yml/badge.svg?branch=main)](https://github.com/echo-vladimir/portfolio/actions/workflows/build-and-deploy.yml)
 ## Overview
 
 This portfolio is a curated display of my projects, providing a glimpse into my design and development capabilities. Set against a dark theme highlighted by neon accents, each element has been handcrafted to ensure quality and precision. One distinct feature is the horizontal scrolling, allowing each project to stand out and capture the viewer's attention.
