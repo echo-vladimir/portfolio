@@ -6,7 +6,6 @@ import styles from "./Layout.module.scss";
 import animationStyles from "../styles/animation.module.scss";
 import SlideAnimationContext from "../contexts/SlideAnimationContext";
 import useSlideAnimation from "../hooks/useSlideAnimation";
-import { ModifyEffect } from "./Effects";
 import { ISPROD, BASEPATH } from "../config/const";
 
 export default function Layout({ children }) {
@@ -27,10 +26,7 @@ export default function Layout({ children }) {
   return (
     <>
       <Head>
-        <link
-          rel="icon"
-          href={`${ISPROD ? BASEPATH : ""}/favicon.ico`}
-        />
+        <link rel="icon" href={`${ISPROD ? BASEPATH : ""}/favicon.ico`} />
         <meta
           name="viewport"
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
@@ -48,7 +44,7 @@ export default function Layout({ children }) {
         {isLoading && (
           <div className={animationStyles["loading-container"]}>
             <div ref={loadingRef} className={animationStyles.loading} />
-            <ModifyEffect from={`Загрузка`} to={`Loading`} speed={1000} />
+            <p>L O A D I N G</p>
           </div>
         )}
 
