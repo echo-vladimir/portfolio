@@ -21,8 +21,10 @@ jobs:
       - name: Delete deployment env
         uses: strumwolf/delete-deployment-environment@v2.3.0
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          token: ${{ steps.get-token.outputs.token }}
           environment: github-pages
+          ref: gh-pages
+          onlyRemoveDeployments: true
   build:
     needs: cleanup
     runs-on: ubuntu-latest
@@ -48,3 +50,4 @@ jobs:
         with:
           branch: gh-pages
           folder: out
+          commit-message: "Auto-Deploy: Latest Build"
