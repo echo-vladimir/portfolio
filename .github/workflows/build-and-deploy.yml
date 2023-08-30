@@ -21,7 +21,7 @@ jobs:
       - name: Delete deployment env
         uses: strumwolf/delete-deployment-environment@v2.3.0
         with:
-          token: ${{ steps.get-token.outputs.token }}
+          token: ${{ secrets.GITHUB_TOKEN }}
           environment: github-pages
   build:
     needs: cleanup
