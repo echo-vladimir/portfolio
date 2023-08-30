@@ -1,13 +1,10 @@
 # ./
 
-![Showcase](./public/media/portfolio/index.jpg)
-
 ## Overview
 
-This app shows the projects I've done. It's like a gallery of my skills and
-work. The design is dark with some bright neon colors. Everything was made by
-hand. The animations make the site feel alive. But the best part? It uses
-horizontal scrolling. This lets each project get the attention it deserves.
+This portfolio is a curated display of my projects, providing a glimpse into my design and development capabilities. Set against a dark theme highlighted by neon accents, each element has been handcrafted to ensure quality and precision. One distinct feature is the horizontal scrolling, allowing each project to stand out and capture the viewer's attention.
+
+![Showcase](./public/media/portfolio/index.jpg)
 
 ## Stack
 
@@ -22,7 +19,7 @@ horizontal scrolling. This lets each project get the attention it deserves.
 
 ## Viewing
 
-URL
+[echo-vladimir.github.io/portfolio](https://echo-vladimir.github.io/portfolio/)
 
 ## Contact
 
