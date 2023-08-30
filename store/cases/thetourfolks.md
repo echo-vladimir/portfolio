@@ -5,7 +5,7 @@ lang: "en"
 size: "L"
 tags: ["Full-Cycle Development", "UX/UI Design"]
 country: "Italy"
-cover: "https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/cover.jpg"
+cover: "https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693401905/cover_nczgbg"
 description: "Milan Tours Booking System"
 stack:
   [
@@ -124,56 +124,56 @@ stack:
 <a href="https://thetourfolks.com/" target="_blank" >Release</a>
 
 <figure>
-    <img alt="Landing page with layered video elements creating a dynamic visual experience." src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/TheTourFolks1.png"/>
+    <img alt="Landing page with layered video elements creating a dynamic visual experience." src="https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693402517/TheTourFolks1_okxmqw.png"/>
     <figcaption>Dynamic Landing Page</figcaption>
 </figure>
 
 <figure>
-    <img alt="Design sample with marble fractures intertwined with minimalist accents." src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/TheTourFolks2.png"/>
+    <img alt="Design sample with marble fractures intertwined with minimalist accents." src="https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693402562/TheTourFolks2_g51mlf.png"/>
     <figcaption>Marble & Minimalism RWD Design Showcase</figcaption>
 </figure>
 
 <figure>
-    <img alt="Blog posts with clean formatting and visual emphasis." src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/TheTourFolks3.png"/>
+    <img alt="Blog posts with clean formatting and visual emphasis." src="https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693402562/TheTourFolks3_pbllss.png"/>
     <figcaption>Blog Posts</figcaption>
 </figure>
 
 <figure>
-    <img alt="In-depth view of a single blog post showcasing its layout and content." src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/TheTourFolks4.png"/>
+    <img alt="In-depth view of a single blog post showcasing its layout and content." src="https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693402562/TheTourFolks4_rrrzrx.png"/>
     <figcaption>Hover Blog Post View</figcaption> 
 </figure>
 
 <figure>
-    <img alt="Interactive WYSIWYG editor for crafting content." src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/TheTourFolks5.png"/>
+    <img alt="Interactive WYSIWYG editor for crafting content." src="https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693402562/TheTourFolks5_npeygp.png"/>
     <figcaption>WYSIWYG Post Editor</figcaption>
 </figure>
 
 <figure>
-    <img alt="Interface samples for ticket purchasing experience." src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/TheTourFolks6.png"/>
+    <img alt="Interface samples for ticket purchasing experience." src="https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693402562/TheTourFolks6_d8uz1s.png"/>
     <figcaption>Ticket Purchase Interface</figcaption>
 </figure>
 
 <figure>
-    <img alt="CRM screens tailored for a specific user role." src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/TheTourFolks7.png"/>
+    <img alt="CRM screens tailored for a specific user role." src="https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693402562/TheTourFolks7_lfxyox.png"/>
     <figcaption> Role-Specific CRM Screens</figcaption>
 </figure>
 
 <figure>
-    <img alt="Tour group status tracking interface for a particular role." src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/TheTourFolks8.png"/>
+    <img alt="Tour group status tracking interface for a particular role." src="https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693402566/TheTourFolks8_lcfccv.png"/>
     <figcaption> Tour Group Tracking</figcaption>
 </figure>
 
 <figure>
-    <img alt="Tabular representation for order management." src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/TheTourFolks9.png"/>
+    <img alt="Tabular representation for order management." src="https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693402581/TheTourFolks9_lxh8yn.png"/>
     <figcaption>Order Control Table</figcaption>
 </figure>
 
 <figure>
-    <img alt="Interface for creating tours with user role settings in RBAC." src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/TheTourFolks10.png"/>
+    <img alt="Interface for creating tours with user role settings in RBAC." src="https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693402581/TheTourFolks10_iokwwt.png"/>
     <figcaption>Tour Creation & RBAC Options</figcaption>
 </figure>
 
 <figure>
-    <img alt="Distinctive UI elements and widgets." src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/thetourfolks/TheTourFolks12.png"/>
+    <img alt="Distinctive UI elements and widgets." src="https://res.cloudinary.com/dlwvibxw6/image/upload/q_auto,f_auto/v1693402588/TheTourFolks12_fpksyg.png"/>
     <figcaption>Some Interface Components</figcaption>
 </figure>
