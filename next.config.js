@@ -8,7 +8,6 @@ const assetPrefix = `/${repo}/`;
 const basePath = `/${repo}`;
 
 const nextConfig = {
-  output: "export",
   reactStrictMode: true,
   eslint: {
     // FIXME:
