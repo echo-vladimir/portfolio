@@ -42,7 +42,6 @@ jobs:
           npm install --package-lock-only
           npm ci
           npm run build
-          npm run export
           touch out/.nojekyll
 
       - name: Deploy
