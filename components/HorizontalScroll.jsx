@@ -50,19 +50,19 @@ export default function HorizontalScroll({ children, allCasesData }) {
     }
   }, [visibleElements]);
 
-  const scrollBehavior = (instructions) => {
+  const scrollBehavior = async (instructions) => {
     if (!instructions || instructions.length === 0) return;
-    const [{ el, left }] = instructions;
-    if (!el) return;
 
-    const styler = Styler(el);
+    for (let { el, left } of instructions) {
+      if (!el) continue;
 
-    animate({
-      from: el.scrollLeft,
-      to: left,
-      type: "spring",
-      onUpdate: (left) => styler.set("scrollLeft", left),
-    });
+      await animate({
+        from: el.scrollLeft,
+        to: left,
+        type: "spring",
+        onUpdate: (left) => el.scrollTo({ left }),
+      }).finished;
+    }
   };
 
   const { isLoading, isAnimationComplete, currentContentRef } = useContext(
