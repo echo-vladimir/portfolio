@@ -75,10 +75,13 @@ export default function CardHero({ width, margin }) {
             </p>
           )}
           <h2>Hello there, my name is ‹Volodymyr /› and I&rsquo;m</h2>
-          <h1>Front-end Developer</h1>
+          <h1>Full-stack Developer</h1>
           <h3>&</h3>
           <h1>UX/UI Designer</h1>
           <h3>UX · UI · Figma · TypeScript · JS · NodeJS · Next · React</h3>
+          <p>
+          
+          </p>
           <p className={styles.footer}>
             <a href="mailto:echo.vladimir.k@gmail.com">
               echo.vladimir.k@gmail.com

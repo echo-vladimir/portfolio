@@ -56,7 +56,7 @@ export default function Case({ caseData }) {
   const [containerWidth, setContainerWidth] = useState(0);
   const [isSafari, setIsSafari] = useState(false);
 
-  const itemWidth = containerWidth * 0.7;
+  const itemWidth = containerWidth * 0.5;
   const itemMargin = `${(containerWidth - itemWidth) / 2}px`;
 
   useEffect(() => {
@@ -155,21 +155,22 @@ export default function Case({ caseData }) {
               </div>
             </div>
           </section>
-          {blocks.map((block, index) => (
-            <div
-              key={index}
-              dangerouslySetInnerHTML={{ __html: block }}
-              style={
-                device !== "desktop"
-                  ? {
-                      width: itemWidth,
-                      marginLeft: itemMargin,
-                      marginRight: itemMargin,
-                    }
-                  : {}
-              }
-            />
-          ))}
+          {blocks.map((block, index) => {
+            return (
+              <div
+                key={index}
+                dangerouslySetInnerHTML={{ __html: block }}
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  width: itemWidth,
+                  marginLeft: itemMargin,
+                  marginRight: itemMargin,
+                }}
+              />
+            );
+          })}
         </ScrollCase>
       </div>
     </>
