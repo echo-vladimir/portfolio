@@ -1,12 +1,12 @@
 ---
 title: "Jaskółka"
-date: "2024-05-01"
+date: "2024-01-04"
 lang: "en"
 size: "L"
 tags: ["Full-Cycle Development", "UX/UI Design", "Polygraphy"]
 country: "Poland"
 cover: "https://res.cloudinary.com/dlwvibxw6/image/upload/f_auto,q_auto,w_2000/v1712363029/Web_-_Slide_0_xrdblk.png"
-description: ""
+description: "Tourism"
 ---
 
 <figure>

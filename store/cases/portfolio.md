@@ -6,7 +6,7 @@ lang: "en"
 size: "L"
 tags: ["Personal Branding", "UX/UI", "Full-Cycle Development"]
 country: "Paws"
-cover: "https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/portfolio/index.jpg"
+cover: "https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/portfolio/Portfolio.jpg"
 description: ""
 stack: ["JavaScript", "React.js", "Next.js", "Sass", "ESlint", "Github Actions"]
 ---
