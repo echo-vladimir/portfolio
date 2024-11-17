@@ -6,7 +6,7 @@ size: "L"
 tags: ["UX/UI", "Design", "Development", "Front-end"]
 country: "Poland"
 cover: "https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/gts/Logo.jpg"
-description: "Pioneering Solutions in Traffic Management"
+description: "Urban traffic management solutions"
 ---
 
 Global Traffic Systems was a notable European player in the field of traffic
@@ -15,24 +15,10 @@ hardware solutions to enhance road traffic efficiency. Its contributions, such
 as tools for traffic light coordination and real-time traffic monitoring
 systems, brought tangible improvements to daily commuting.
 
-## Sadly, Global Traffic Systems isn't around anymore, so their website doesn't work now :(
-
-- Website Development: At Global Traffic Systems, one of my pivotal roles was to
-  spearhead the design and execution of the company's website. From ideation to
-  implementation, I was deeply involved in ensuring a smooth and adaptive user
-  experience across multiple devices.
-- B2B Interface Design & Development: Beyond working on the main website, my
-  role expanded into designing and implementing interfaces for our specialized
-  traffic management systems. This role marked the beginning of my journey into
-  frontend development, as I began to embed parts of the design myself. My
-  contributions prominently featured systems like traffic light control,
-  congestion management, and other custom traffic solutions for various
-  companies and government initiatives.
-- Branding & Promotion: My involvement wasn't restricted to just the digital
-  space. I also took part in bolstering the company's offline brand identity by
-  crafting impactful promotional materials, from leaflets and brochures to
-  presentations, ensuring brand uniformity across all touchpoints. Moreover, the
-  creation of the company's distinct logo was a task I took pride in.
+- Frontend Development: Designed and implemented dynamic, real-time UI's for traffic control using JavaScript, React, SASS, and REST APIs, ensuring responsive performance and scalability.
+- UX Optimization: Enhanced operator workflows by creating intuitive UI/UX solutions improving decision-making processes in high-stakes environments.
+- Data Integration: Worked closely with backend teams to integrate live traffic data and IoT sensor inputs into user-facing interfaces.
+- Website Development: Led the development of the company’s website, ensuring mobile-first design and cross-platform compatibility.
 
 <figure>
     <img alt="Emblem of Global Traffic Systems" src="https://raw.githubusercontent.com/echo-vladimir/portfolio/main/public/media/gts/Logo.jpg"/>
